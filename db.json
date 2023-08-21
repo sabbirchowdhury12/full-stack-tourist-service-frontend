@@ -132,5 +132,187 @@
         "A bit pricey, but you get what you pay for in terms of quality. - TechEnthusiast99"
       ]
     }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "categoryName": " CPU / Processor",
+      "data": [
+        {
+          "id": 1,
+          "name": "AMD Ryzen 7 5800X",
+          "price": 449.99,
+          "status": "In Stock",
+          "rating": 4.7,
+          "image": "/images/cpu1.jpg"
+        },
+        {
+          "id": 2,
+          "name": "Intel Core i9-12900K",
+          "price": 599.99,
+          "status": "In Stock",
+          "rating": 4.9,
+          "image": "/images/cpu2.jpg"
+        },
+        {
+          "id": 3,
+          "name": "AMD Ryzen 9 5950X",
+          "price": 749.99,
+          "status": "In Stock",
+          "rating": 4.8,
+          "image": "/images/cpu3.jpg"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "categoryName": "Motherboard",
+      "data": [
+        {
+          "id": 4,
+          "name": "ASUS ROG Crosshair VIII Hero",
+          "price": 399.99,
+          "status": "In Stock",
+          "rating": 4.6,
+          "image": "/images/motherboard1.jpg"
+        },
+        {
+          "id": 5,
+          "name": "Gigabyte Z690 AORUS Ultra",
+          "price": 449.99,
+          "status": "In Stock",
+          "rating": 4.7,
+          "image": "/images/motherboard2.jpg"
+        },
+        {
+          "id": 6,
+          "name": "MSI MPG B550 GAMING EDGE",
+          "price": 189.99,
+          "status": "In Stock",
+          "rating": 4.5,
+          "image": "/images/motherboard3.jpg"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "categoryName": "RAM",
+      "RAM": [
+        {
+          "id": 7,
+          "name": "Corsair Vengeance LPX 16GB DDR4",
+          "price": 89.99,
+          "status": "In Stock",
+          "rating": 4.4,
+          "image": "/images/ram1.jpg"
+        },
+        {
+          "id": 8,
+          "name": "G.SKILL Trident Z RGB 32GB DDR4",
+          "price": 169.99,
+          "status": "In Stock",
+          "rating": 4.6,
+          "image": "/images/ram2.jpg"
+        },
+        {
+          "id": 9,
+          "name": "Crucial Ballistix 8GB DDR4",
+          "price": 64.99,
+          "status": "In Stock",
+          "rating": 4.2,
+          "image": "/images/ram3.jpg"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "categoryName": "Power Supply Unit",
+      "data": [
+        {
+          "id": 10,
+          "name": "Corsair RM750x 750W 80+ Gold",
+          "price": 129.99,
+          "status": "In Stock",
+          "rating": 4.8,
+          "image": "/images/psu1.jpg"
+        },
+        {
+          "id": 11,
+          "name": "EVGA Supernova 650W 80+ Platinum",
+          "price": 149.99,
+          "status": "In Stock",
+          "rating": 4.7,
+          "image": "/images/psu2.jpg"
+        },
+        {
+          "id": 12,
+          "name": "Seasonic Focus GX-550 80+ Gold",
+          "price": 99.99,
+          "status": "In Stock",
+          "rating": 4.5,
+          "image": "/images/psu3.jpg"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "categoryName": "Storage Device",
+      "data": [
+        {
+          "id": 13,
+          "name": "Samsung 970 EVO 500GB NVMe SSD",
+          "price": 99.99,
+          "status": "In Stock",
+          "rating": 4.7,
+          "image": "/images/ssd1.jpg"
+        },
+        {
+          "id": 14,
+          "name": "Crucial MX500 1TB SATA SSD",
+          "price": 129.99,
+          "status": "In Stock",
+          "rating": 4.6,
+          "image": "/images/ssd2.jpg"
+        },
+        {
+          "id": 15,
+          "name": "WD Black 2TB NVMe SSD",
+          "price": 299.99,
+          "status": "In Stock",
+          "rating": 4.8,
+          "image": "/images/ssd3.jpg"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "categoryName": "Monitor",
+      "data": [
+        {
+          "id": 16,
+          "name": "LG 27GL850-B 27\" QHD Gaming Monitor",
+          "price": 499.99,
+          "status": "In Stock",
+          "rating": 4.9,
+          "image": "/images/monitor1.jpg"
+        },
+        {
+          "id": 17,
+          "name": "ASUS TUF Gaming VG279Q 27\" Full HD Monitor",
+          "price": 299.99,
+          "status": "In Stock",
+          "rating": 4.5,
+          "image": "/images/monitor2.jpg"
+        },
+        {
+          "id": 18,
+          "name": "Dell S2719DGF 27\" QHD Gaming Monitor",
+          "price": 359.99,
+          "status": "In Stock",
+          "rating": 4.6,
+          "image": "/images/monitor3.jpg"
+        }
+      ]
+    }
   ]
 }
