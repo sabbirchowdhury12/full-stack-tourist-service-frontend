@@ -20,7 +20,7 @@ const RootLayout = ({ children }) => {
 
   return (
     <div>
-      <nav className="block w-full rounded-xl shadow-md backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border border-white/80 bg-white text-white mx-auto py-2 px-4 lg:px-8 lg:py-4">
+      <nav className="block w-full rounded-xl shadow-md backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border border-white/80 bg-white text-white mx-auto py-2 px-4 lg:px-8 lg:py-4 ">
         <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
           <Typography
             as="a"
@@ -102,7 +102,12 @@ const RootLayout = ({ children }) => {
           </div>
         </Collapse>
       </nav>
-      <div className="h-screen">{children}</div>
+      <div
+        className="h-full container mx-6
+lg:mx-auto my-20"
+      >
+        {children}
+      </div>
       <footer className="flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t border-blue-gray-50 py-6 text-center md:justify-between">
         <Typography color="blue-gray" className="font-normal">
           &copy; 2023 Material Tailwind

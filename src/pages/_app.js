@@ -1,13 +1,12 @@
-import RootLayout from "@/components/layout/RootLayout";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@material-tailwind/react";
 
-export default function App({ Component, pageProps }) {
-  return (
+export default function MyApp({ Component, pageProps }) {
+  const getLayout = Component.getLayout || ((page) => page);
+
+  return getLayout(
     <ThemeProvider>
-      <RootLayout>
-        <Component {...pageProps} />
-      </RootLayout>
+      <Component {...pageProps} />
     </ThemeProvider>
   );
 }
