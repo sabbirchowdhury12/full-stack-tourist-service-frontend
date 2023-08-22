@@ -46,7 +46,7 @@ const ProductsCard = ({ products }) => {
             key={ind}
             color="gray"
             variant="gradient"
-            className="w-full  p-8 "
+            className="w-full  p-8 -z-0"
           >
             <CardHeader
               floated={false}
@@ -54,7 +54,7 @@ const ProductsCard = ({ products }) => {
               color="transparent"
               className="m-0 mb-8 rounded-none border-b border-white/10 pb-8 text-center"
             >
-              <img src="https://media.istockphoto.com/id/1419410282/photo/silent-forest-in-spring-with-beautiful-bright-sun-rays.webp?b=1&s=612x612&w=0&k=20&c=C318sxgBBIO66E7vi_0Eu3lXHm9uRDauKvRgeyxY2O4=" />
+              <img src={image} />
             </CardHeader>
             <CardBody className="p-0">
               <ul className="flex flex-col gap-4">
@@ -93,11 +93,11 @@ const ProductsCard = ({ products }) => {
               </ul>
             </CardBody>
             <CardFooter className="mt-12 p-0">
-              <Link href={`product/${id}`}>
+              <Link href={`/product/${id}`}>
                 <Button
                   size="lg"
                   color="white"
-                  className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
+                  className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100 "
                   ripple={false}
                   fullWidth={true}
                 >

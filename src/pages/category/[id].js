@@ -15,10 +15,9 @@ import { useDispatch } from "react-redux";
 const CategoryPage = ({ category }) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  console.log(category);
 
   const handleCart = async ({ id, categoryName }) => {
-    const result = await dispatch(addProduct({ id, categoryName }));
+    dispatch(addProduct({ id, categoryName }));
     router.push("/pcBuildPage");
   };
   return (
@@ -38,7 +37,7 @@ const CategoryPage = ({ category }) => {
               color="transparent"
               className="m-0 mb-8 rounded-none border-b border-white/10 pb-8 text-center"
             >
-              <img src="https://media.istockphoto.com/id/1419410282/photo/silent-forest-in-spring-with-beautiful-bright-sun-rays.webp?b=1&s=612x612&w=0&k=20&c=C318sxgBBIO66E7vi_0Eu3lXHm9uRDauKvRgeyxY2O4=" />
+              <img src={image} />
             </CardHeader>
             <CardBody className="p-0">
               <ul className="flex flex-col gap-4">
@@ -90,7 +89,7 @@ const CategoryPage = ({ category }) => {
                 ripple={false}
                 fullWidth={true}
               >
-                Add TO CART
+                Add TO BUILD
               </Button>
             </CardFooter>
           </Card>

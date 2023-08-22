@@ -2,7 +2,7 @@
   "featuredProducts": [
     {
       "id": "1",
-      "image": "[Link to Image 1]",
+      "image": "https://images.unsplash.com/photo-1587134160474-cd3c9a60a34a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8R3JhcGhpY3MlMjBDYXJkfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
       "productName": "MSI GeForce RTX 3070 Gaming X Trio",
       "category": "Graphics Card",
       "status": "In Stock",
@@ -24,7 +24,7 @@
     },
     {
       "id": "2",
-      "image": "[Link to Image 2]",
+      "image": "https://images.unsplash.com/photo-1540829917886-91ab031b1764?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8UHJvY2Vzc29yfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
       "productName": "Intel Core i9-11900K",
       "category": "Processor",
       "status": "In Stock",
@@ -46,7 +46,7 @@
     },
     {
       "id": "3",
-      "image": "[Link to Image 3]",
+      "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TW9uaXRvcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
       "productName": "LG 27GN850-B 27\" Nano IPS Gaming Monitor",
       "category": "Monitor",
       "status": "In Stock",
@@ -68,7 +68,7 @@
     },
     {
       "id": "4",
-      "image": "[Link to Image 4]",
+      "image": "https://images.unsplash.com/photo-1533279443086-d1c19a186416?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8TWVtb3J5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
       "productName": "Corsair Vengeance RGB Pro 32GB (2 x 16GB) DDR4-3200",
       "category": "Memory",
       "status": "In Stock",
@@ -90,7 +90,7 @@
     },
     {
       "id": "5",
-      "image": "[Link to Image 5]",
+      "image": "https://images.unsplash.com/photo-1597138804456-e7dca7f59d54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3NkfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
       "productName": "Samsung 970 EVO Plus 1TB NVMe SSD",
       "category": "Storage",
       "status": "In Stock",
@@ -112,7 +112,7 @@
     },
     {
       "id": "6",
-      "image": "[Link to Image 6]",
+      "image": "https://images.unsplash.com/photo-1588382472578-8d8b337b277a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8UG93ZXIlMjBTdXBwbHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
       "productName": "EVGA SuperNOVA 750 G+ 750W 80+ Gold Modular PSU",
       "category": "Power Supply",
       "status": "In Stock",
@@ -144,7 +144,7 @@
           "price": 449.99,
           "status": "In Stock",
           "rating": 4.7,
-          "image": "/images/cpu1.jpg"
+          "image": "https://images.unsplash.com/photo-1540829917886-91ab031b1764?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8UHJvY2Vzc29yfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
         },
         {
           "id": 2,
@@ -152,7 +152,7 @@
           "price": 599.99,
           "status": "In Stock",
           "rating": 4.9,
-          "image": "/images/cpu2.jpg"
+          "image": "https://images.unsplash.com/photo-1540829917886-91ab031b1764?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8UHJvY2Vzc29yfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
         },
         {
           "id": 3,
@@ -160,7 +160,7 @@
           "price": 749.99,
           "status": "In Stock",
           "rating": 4.8,
-          "image": "/images/cpu3.jpg"
+          "image": "https://images.unsplash.com/photo-1540829917886-91ab031b1764?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8UHJvY2Vzc29yfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
         }
       ]
     },
@@ -174,7 +174,7 @@
           "price": 399.99,
           "status": "In Stock",
           "rating": 4.6,
-          "image": "/images/motherboard1.jpg"
+          "image": "https://images.unsplash.com/photo-1562408590-e32931084e23?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TW90aGVyYm9hcmR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
         },
         {
           "id": 5,
@@ -182,7 +182,7 @@
           "price": 449.99,
           "status": "In Stock",
           "rating": 4.7,
-          "image": "/images/motherboard2.jpg"
+          "image": "https://images.unsplash.com/photo-1562408590-e32931084e23?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TW90aGVyYm9hcmR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
         },
         {
           "id": 6,
@@ -190,7 +190,7 @@
           "price": 189.99,
           "status": "In Stock",
           "rating": 4.5,
-          "image": "/images/motherboard3.jpg"
+          "image": "https://images.unsplash.com/photo-1562408590-e32931084e23?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TW90aGVyYm9hcmR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
         }
       ]
     },
@@ -204,7 +204,7 @@
           "price": 89.99,
           "status": "In Stock",
           "rating": 4.4,
-          "image": "/images/ram1.jpg"
+          "image": "https://images.unsplash.com/photo-1562976540-1502c2145186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8UkFNfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
         },
         {
           "id": 8,
@@ -212,7 +212,7 @@
           "price": 169.99,
           "status": "In Stock",
           "rating": 4.6,
-          "image": "/images/ram2.jpg"
+          "image": "https://images.unsplash.com/photo-1562976540-1502c2145186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8UkFNfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
         },
         {
           "id": 9,
@@ -220,7 +220,7 @@
           "price": 64.99,
           "status": "In Stock",
           "rating": 4.2,
-          "image": "/images/ram3.jpg"
+          "image": "https://images.unsplash.com/photo-1562976540-1502c2145186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8UkFNfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
         }
       ]
     },
@@ -234,7 +234,7 @@
           "price": 129.99,
           "status": "In Stock",
           "rating": 4.8,
-          "image": "/images/psu1.jpg"
+          "image": "https://images.unsplash.com/photo-1588382472578-8d8b337b277a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8UG93ZXIlMjBTdXBwbHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
         },
         {
           "id": 11,
@@ -242,7 +242,7 @@
           "price": 149.99,
           "status": "In Stock",
           "rating": 4.7,
-          "image": "/images/psu2.jpg"
+          "image": "https://images.unsplash.com/photo-1588382472578-8d8b337b277a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8UG93ZXIlMjBTdXBwbHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
         },
         {
           "id": 12,
@@ -250,7 +250,7 @@
           "price": 99.99,
           "status": "In Stock",
           "rating": 4.5,
-          "image": "/images/psu3.jpg"
+          "image": "https://images.unsplash.com/photo-1588382472578-8d8b337b277a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8UG93ZXIlMjBTdXBwbHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
         }
       ]
     },
@@ -264,7 +264,7 @@
           "price": 99.99,
           "status": "In Stock",
           "rating": 4.7,
-          "image": "/images/ssd1.jpg"
+          "image": "https://plus.unsplash.com/premium_photo-1671439429636-6d8d66247143?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c3NkfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
         },
         {
           "id": 14,
@@ -272,7 +272,7 @@
           "price": 129.99,
           "status": "In Stock",
           "rating": 4.6,
-          "image": "/images/ssd2.jpg"
+          "image": "https://plus.unsplash.com/premium_photo-1671439429636-6d8d66247143?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c3NkfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
         },
         {
           "id": 15,
@@ -280,7 +280,7 @@
           "price": 299.99,
           "status": "In Stock",
           "rating": 4.8,
-          "image": "/images/ssd3.jpg"
+          "image": "https://plus.unsplash.com/premium_photo-1671439429636-6d8d66247143?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c3NkfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
         }
       ]
     },
@@ -294,7 +294,7 @@
           "price": 499.99,
           "status": "In Stock",
           "rating": 4.9,
-          "image": "/images/monitor1.jpg"
+          "image": "https://images.unsplash.com/photo-1588200908342-23b585c03e26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8TW9uaXRvcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
         },
         {
           "id": 17,
@@ -302,7 +302,7 @@
           "price": 299.99,
           "status": "In Stock",
           "rating": 4.5,
-          "image": "/images/monitor2.jpg"
+          "image": "https://images.unsplash.com/photo-1588200908342-23b585c03e26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8TW9uaXRvcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
         },
         {
           "id": 18,
@@ -310,7 +310,7 @@
           "price": 359.99,
           "status": "In Stock",
           "rating": 4.6,
-          "image": "/images/monitor3.jpg"
+          "image": "https://images.unsplash.com/photo-1588200908342-23b585c03e26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8TW9uaXRvcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
         }
       ]
     }

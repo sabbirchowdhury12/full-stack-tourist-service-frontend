@@ -30,7 +30,7 @@ const PcBuildPage = ({ categories }) => {
             >
               <div className="bg-light-green-500 w-5 h-5 rounded-full"></div>
               <p className="font-bold">{category.categoryName}</p>
-              <Link href={`category/${category.id}`}>
+              <Link href={`/category/${category.id}`}>
                 <button className="p-2 border border-light-green-500 rounded hover:bg-light-green-500 hover:text-white">
                   Choose
                 </button>

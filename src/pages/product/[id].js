@@ -10,7 +10,6 @@ import {
 } from "@material-tailwind/react";
 
 const ProductDetails = ({ product }) => {
-  console.log(product);
   const {
     category,
     productName,
@@ -31,10 +30,7 @@ const ProductDetails = ({ product }) => {
         color="transparent"
         className="m-0 mb-8 rounded-none border-b border-white/10 pb-8 text-center"
       >
-        <img
-          width={500}
-          src="https://media.istockphoto.com/id/1419410282/photo/silent-forest-in-spring-with-beautiful-bright-sun-rays.webp?b=1&s=612x612&w=0&k=20&c=C318sxgBBIO66E7vi_0Eu3lXHm9uRDauKvRgeyxY2O4="
-        />
+        <img src={image} />
       </CardHeader>
       <CardBody className="p-0">
         <ul className="flex flex-col gap-4">
