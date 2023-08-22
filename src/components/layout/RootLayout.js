@@ -6,6 +6,7 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const RootLayout = ({ children }) => {
@@ -22,13 +23,11 @@ const RootLayout = ({ children }) => {
     <div>
       <nav className="block w-full rounded-xl shadow-md backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border border-white/80 bg-white text-white mx-auto py-2 px-4 lg:px-8 lg:py-4 ">
         <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
-          <Typography
-            as="a"
-            href="#"
-            className="mr-4 cursor-pointer py-1.5 font-bold"
-          >
-            BUILD YOUR PC
-          </Typography>
+          <Link href={"/"}>
+            <Typography className="mr-4 cursor-pointer py-1.5 font-bold">
+              BUILD YOUR PC
+            </Typography>
+          </Link>
           <div className="hidden lg:block">
             <div className="w-72 ">
               <Select label="categories">
@@ -40,13 +39,15 @@ const RootLayout = ({ children }) => {
               </Select>
             </div>
           </div>
-          <Button
-            variant="gradient"
-            size="sm"
-            className="hidden lg:inline-block"
-          >
-            <span>PC Builder</span>
-          </Button>
+          <Link href={"/pcBuildPage"}>
+            <Button
+              size="md"
+              fullWidth
+              className="font-bold bg-light-green-500"
+            >
+              <span>PC BUILDER</span>
+            </Button>
+          </Link>
           <IconButton
             variant="text"
             className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -96,9 +97,15 @@ const RootLayout = ({ children }) => {
                 <Option>Monitor</Option>
               </Select>
             </div>
-            <Button variant="gradient" size="sm" fullWidth className="mb-2">
-              <span>PC BUILDER</span>
-            </Button>
+            <Link href={"/pcBuildPage"}>
+              <Button
+                size="sm"
+                fullWidth
+                className="mb-2 font-bold bg-light-green-500"
+              >
+                <span>PC BUILDER</span>
+              </Button>
+            </Link>
           </div>
         </Collapse>
       </nav>

@@ -1,5 +1,6 @@
 import RootLayout from "@/components/layout/RootLayout";
 import { CheckIcon } from "@/components/ui/ProductsCard";
+import { addProduct } from "@/redux/product/productSlice";
 import {
   Card,
   CardHeader,
@@ -8,10 +9,18 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-import Link from "next/link";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 const CategoryPage = ({ category }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   console.log(category);
+
+  const handleCart = async ({ id, categoryName }) => {
+    const result = await dispatch(addProduct({ id, categoryName }));
+    router.push("/pcBuildPage");
+  };
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  w-full -z-10">
       {category?.data?.map((product, ind) => {
@@ -68,17 +77,21 @@ const CategoryPage = ({ category }) => {
               </ul>
             </CardBody>
             <CardFooter className="mt-12 p-0">
-              <Link href={`product/${id}`}>
-                <Button
-                  size="lg"
-                  color="white"
-                  className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
-                  ripple={false}
-                  fullWidth={true}
-                >
-                  Add TO CART
-                </Button>
-              </Link>
+              <Button
+                onClick={() =>
+                  handleCart({
+                    id: product.id,
+                    categoryName: category.categoryName,
+                  })
+                }
+                size="lg"
+                color="white"
+                className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
+                ripple={false}
+                fullWidth={true}
+              >
+                Add TO CART
+              </Button>
             </CardFooter>
           </Card>
         );

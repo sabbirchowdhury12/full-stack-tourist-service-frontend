@@ -197,7 +197,7 @@
     {
       "id": "3",
       "categoryName": "RAM",
-      "RAM": [
+      "data": [
         {
           "id": 7,
           "name": "Corsair Vengeance LPX 16GB DDR4",
