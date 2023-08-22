@@ -9,6 +9,7 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 
@@ -22,6 +23,16 @@ const CategoryPage = ({ category }) => {
   };
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  w-full -z-10">
+      <Head>
+        <title>PC Builder - categoty page</title>
+        <meta
+          name="description"
+          content="This is news portal of programming hero made by next-js"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       {category?.data?.map((product, ind) => {
         const { name, price, rating, status, id, image } = product;
         return (
@@ -106,7 +117,9 @@ CategoryPage.getLayout = function getLayout(page) {
 };
 
 export const getServerSideProps = async ({ params }) => {
-  const res = await fetch(`http://localhost:5000/categories/${params.id}`);
+  const res = await fetch(
+    `https://pc-builder-next-js-xi.vercel.app/api/category?id=${params.id}`
+  );
   const category = await res.json();
 
   return { props: { category } };

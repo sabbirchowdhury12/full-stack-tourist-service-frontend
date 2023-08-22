@@ -8,6 +8,7 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+import Head from "next/head";
 
 const ProductDetails = ({ product }) => {
   const {
@@ -24,6 +25,15 @@ const ProductDetails = ({ product }) => {
   } = product;
   return (
     <Card color="gray" variant="gradient" className="w-full  p-8 ">
+      <Head>
+        <title>PC Builder - ProductDeatils page</title>
+        <meta
+          name="description"
+          content="This is news portal of programming hero made by next-js"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <CardHeader
         floated={false}
         shadow={false}
@@ -119,12 +129,24 @@ ProductDetails.getLayout = function getLayout(page) {
 };
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:5000/featuredProducts");
+  // if (typeof window === "undefined") {
+  //   const products = [];
+  //   const paths = products.map((product) => ({
+  //     params: {
+  //       id: product?._id,
+  //     },
+  //   }));
+
+  //   return { paths, fallback: false };
+  // }
+  const res = await fetch(
+    "https://pc-builder-next-js-xi.vercel.app/api/product"
+  );
   const products = await res.json();
 
   const paths = products.map((product) => ({
     params: {
-      id: product.id,
+      id: product._id,
     },
   }));
 
@@ -132,8 +154,11 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
+  // if (typeof window === "undefined") {
+  //   return { props: { product: [] } };
+  // }
   const res = await fetch(
-    `http://localhost:5000/featuredProducts/${params.id}`
+    `https://pc-builder-next-js-xi.vercel.app/api/product?id=${params.id}`
   );
   const product = await res.json();
 

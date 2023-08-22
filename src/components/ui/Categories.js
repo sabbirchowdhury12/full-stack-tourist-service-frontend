@@ -9,7 +9,7 @@ const Categories = ({ categories }) => {
           return (
             <Link
               key={category.id}
-              href={`category/${category.id}`}
+              href={`category/${category._id}`}
               className="bg-light-green-800 p-2 rounded text-white font-bold"
             >
               {category.categoryName}

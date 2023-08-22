@@ -38,7 +38,7 @@ const ProductsCard = ({ products }) => {
           price,
           averageRating,
           status,
-          id,
+          _id,
           image,
         } = product;
         return (
@@ -93,7 +93,7 @@ const ProductsCard = ({ products }) => {
               </ul>
             </CardBody>
             <CardFooter className="mt-12 p-0">
-              <Link href={`/product/${id}`}>
+              <Link href={`/product/${_id}`}>
                 <Button
                   size="lg"
                   color="white"

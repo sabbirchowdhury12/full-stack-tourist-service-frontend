@@ -1,5 +1,6 @@
 import RootLayout from "@/components/layout/RootLayout";
 import { clearCart } from "@/redux/product/productSlice";
+import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import { Toaster, toast } from "react-hot-toast";
@@ -15,6 +16,15 @@ const PcBuildPage = ({ categories }) => {
   };
   return (
     <div className="flex flex-col  w-4/5 mx-auto border border-blue-600">
+      <Head>
+        <title>PC builder-buil page</title>
+        <meta
+          name="description"
+          content="This is news portal of programming hero made by next-js"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Toaster position="top-center" reverseOrder={false} />
       <div className="flex justify-between p-4 bg-blue-gray-600 w-full text-center font-bold text-xl text-white border-b-2">
         <p> Build Your PC</p>
@@ -25,12 +35,12 @@ const PcBuildPage = ({ categories }) => {
         {categories.map((category) => {
           return (
             <div
-              key={category.id}
+              key={category._id}
               className="flex justify-between w-full items-center p-4 "
             >
               <div className="bg-light-green-500 w-5 h-5 rounded-full"></div>
               <p className="font-bold">{category.categoryName}</p>
-              <Link href={`/category/${category.id}`}>
+              <Link href={`/category/${category._id}`}>
                 <button className="p-2 border border-light-green-500 rounded hover:bg-light-green-500 hover:text-white">
                   Choose
                 </button>
@@ -59,7 +69,9 @@ PcBuildPage.getLayout = function getLayout(page) {
 };
 
 export const getServerSideProps = async () => {
-  const res = await fetch("http://localhost:5000/categories");
+  const res = await fetch(
+    "https://pc-builder-next-js-xi.vercel.app/api/category"
+  );
   const categories = await res.json();
 
   return { props: { categories } };

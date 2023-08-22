@@ -31,21 +31,15 @@ const RootLayout = ({ children }) => {
           <div className="hidden lg:block">
             <div className="w-72 ">
               <Select label="categories">
-                <Link href={"/category/1"}>
-                  <Option>CPU / Processor</Option>
-                </Link>
-                <Link href={"/category/2"}>
-                  <Option>Motherboard</Option>
-                </Link>
-                <Link href={"/category/3"}>
-                  <Option>RAM</Option>
-                </Link>
-                <Link href={"/category/4"}>
-                  <Option>Storage Device</Option>
-                </Link>
-                <Link href={"/category/6"}>
-                  <Option>Monitor</Option>
-                </Link>
+                <Option>CPU / Processor</Option>
+
+                <Option>Motherboard</Option>
+
+                <Option>RAM</Option>
+
+                <Option>Storage Device</Option>
+
+                <Option>Monitor</Option>
               </Select>
             </div>
           </div>
@@ -107,15 +101,14 @@ const RootLayout = ({ children }) => {
                 <Option>Monitor</Option>
               </Select>
             </div>
-            <Link href={"/pcBuildPage"}>
-              <Button
-                size="sm"
-                fullWidth
-                className="mb-2 font-bold bg-light-green-500"
-              >
-                <span>PC BUILDER</span>
-              </Button>
-            </Link>
+
+            <Button
+              size="sm"
+              fullWidth
+              className="mb-2 font-bold bg-light-green-500"
+            >
+              <span>PC BUILDER</span>
+            </Button>
           </div>
         </Collapse>
       </nav>
