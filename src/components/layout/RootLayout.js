@@ -1,13 +1,6 @@
-import {
-  Collapse,
-  Typography,
-  Button,
-  IconButton,
-  Select,
-  Option,
-} from "@material-tailwind/react";
-import Link from "next/link";
+import { Navbar, Typography } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
+import { TopNavbar } from "../shared/Navbar";
 
 const RootLayout = ({ children }) => {
   const [openNav, setOpenNav] = useState(false);
@@ -21,97 +14,7 @@ const RootLayout = ({ children }) => {
 
   return (
     <div>
-      <nav className="block w-full rounded-xl shadow-md backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border border-white/80 bg-white text-white mx-auto py-2 px-4 lg:px-8 lg:py-4 z-10">
-        <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
-          <Link href={"/"}>
-            <Typography className="mr-4 cursor-pointer py-1.5 font-bold">
-              BUILD YOUR PC
-            </Typography>
-          </Link>
-          <div className="hidden lg:block">
-            <div className="w-72 ">
-              <Select label="categories">
-                <Option>CPU / Processor</Option>
-
-                <Option>Motherboard</Option>
-
-                <Option>RAM</Option>
-
-                <Option>Storage Device</Option>
-
-                <Option>Monitor</Option>
-              </Select>
-            </div>
-          </div>
-          <Link href={"/pcBuildPage"}>
-            <Button
-              size="md"
-              fullWidth
-              className="font-bold bg-light-green-500"
-            >
-              <span>PC BUILDER</span>
-            </Button>
-          </Link>
-          <IconButton
-            variant="text"
-            className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-            ripple={false}
-            onClick={() => setOpenNav(!openNav)}
-          >
-            {openNav ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                className="h-6 w-6"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
-          </IconButton>
-        </div>
-        <Collapse open={openNav}>
-          <div className="container mx-auto">
-            <div className="w-72 my-5">
-              <Select label="categories">
-                <Option>CPU / Processor</Option>
-                <Option>Motherboard</Option>
-                <Option>RAM</Option>
-                <Option>Storage Device</Option>
-                <Option>Monitor</Option>
-              </Select>
-            </div>
-
-            <Button
-              size="sm"
-              fullWidth
-              className="mb-2 font-bold bg-light-green-500"
-            >
-              <span>PC BUILDER</span>
-            </Button>
-          </div>
-        </Collapse>
-      </nav>
+      <TopNavbar />
       <div
         className="h-full container mx-6
 lg:mx-auto my-32 "
