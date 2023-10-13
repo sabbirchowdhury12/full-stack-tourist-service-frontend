@@ -1,32 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import RootLayout from "src/components/layout/RootLayout";
-import { useUserLoginMutation } from "src/redux/api/authApi";
+import { useCreateUserMutation } from "src/redux/api/authApi";
 import {
   Card,
   Input,
-  Checkbox,
   Button,
   Typography,
+  useSelect,
 } from "@material-tailwind/react";
-import Link from "next/link";
 import { setLocalStorage } from "src/utiles/localStorage";
-import useUserFromLocalStorage from "src/customHooks/useUserFromLocalStorage";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
-const LoginPage = () => {
+const SignupPage = () => {
   const router = useRouter();
-  const [userLogin] = useUserLoginMutation();
+  const [error, setError] = useState("");
+  const [createUser] = useCreateUserMutation();
   const { register, handleSubmit } = useForm();
 
-  const user = useUserFromLocalStorage();
   if (user) {
     router.push("/");
     return;
   }
   const onSubmit = async (data) => {
-    console.log(data);
-    const result = await userLogin({ ...data }).unwrap();
+    const { name, email, password, confirmPassword } = data;
+    setError("");
+    if (password !== confirmPassword) {
+      setError("password and confirm password should have matched");
+      return;
+    }
+
+    const userData = {
+      name,
+      email,
+      password,
+    };
+
+    const result = await createUser({ ...userData }).unwrap();
+
     setLocalStorage("accessToken", result.data.accessToken);
     setLocalStorage("user", result.data.user);
   };
@@ -34,12 +46,12 @@ const LoginPage = () => {
   return (
     <Card
       color="transparent"
-      className="flex justify-center mx-auto items-center bg-[#E5F0FD] h-screen"
+      className="flex justify-center items-center bg-[#E5F0FD] shadow h-screen"
       shadow={false}
     >
       <div className="bg-white p-5 lg:p-10 rounded-md">
         <Typography variant="h4" color="blue-gray" className="text-center">
-          LOGIN
+          SIGN UP
         </Typography>
         <Typography color="gray" className="mt-1 font-normal"></Typography>
         <form
@@ -47,26 +59,41 @@ const LoginPage = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="mb-4 flex flex-col gap-6">
-            <Input size="lg" label="Email" {...register("email")} />
+            <Input
+              size="lg"
+              label="Name"
+              {...register("name", { required: true })}
+            />
+            <Input
+              size="lg"
+              label="Email"
+              {...register("email", { required: true })}
+            />
             <Input
               type="password"
               size="lg"
               label="Password"
               {...register("password", { required: true })}
             />
+            <Input
+              type="password"
+              size="lg"
+              label="Confirm Password"
+              {...register("confirmPassword", { required: true })}
+            />
           </div>
-
+          <p className="text-sm text-sub_primary italic">{error}</p>
           <Button
             className="mt-6 bg-primary hover:bg-secondary"
             fullWidth
             type="submit"
           >
-            Login
+            Sign Up
           </Button>
           <Typography color="gray" className="mt-4 text-center font-normal">
-            Don't have any account?{" "}
-            <Link href="/signup" className="font-medium text-primary">
-              SIGN UP
+            Already have an account?{" "}
+            <Link href="/login" className="font-medium text-primary">
+              LOGIN
             </Link>
           </Typography>
         </form>
@@ -75,22 +102,8 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignupPage;
 
-LoginPage.getLayout = function getLayout(page) {
+SignupPage.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
-
-//#3554d1 -- background
-//#051036 border
-//#d93025
-// #0d2857
-{
-  /* <form onSubmit={handleSubmit(onSubmit)}>
-<input {...register("email")} />
-
-<input {...register("password", { required: true })} />
-
-<input className="text-primary" type="submit" />
-</form> */
-}

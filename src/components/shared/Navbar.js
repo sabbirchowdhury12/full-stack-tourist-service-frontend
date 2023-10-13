@@ -1,14 +1,19 @@
 import React from "react";
 import {
   Navbar,
-  MobileNav,
+  Collapse,
   Typography,
   Button,
   IconButton,
 } from "@material-tailwind/react";
+import Link from "next/link";
+import { getLocalStorage } from "src/utiles/localStorage";
+import useUserFromLocalStorage from "src/customHooks/useUserFromLocalStorage";
 
 export function TopNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
+
+  const user = useUserFromLocalStorage();
 
   React.useEffect(() => {
     window.addEventListener(
@@ -53,12 +58,27 @@ export function TopNavbar() {
           GO_ON_FIRE
         </Typography>
         <div className="hidden lg:block">{navList}</div>
-        <Button
-          size="lg"
-          className="bg-white text-primary shadow-none font-normal border border-primary hover:shadow-none hover:bg-primary hover:text-white transition-all duration-300 ease-in-out hidden lg:inline-block"
-        >
-          <span>Sign Up / Sign IN</span>
-        </Button>
+        {user ? (
+          <Button
+            size="lg"
+            className="bg-white text-primary shadow-none font-normal border border-primary hover:shadow-none hover:bg-primary hover:text-white transition-all duration-300 ease-in-out hidden lg:inline-block"
+          >
+            <Link href={"/login"}>
+              {" "}
+              <span>{user.name}</span>
+            </Link>
+          </Button>
+        ) : (
+          <Button
+            size="lg"
+            className="bg-white text-primary shadow-none font-normal border border-primary hover:shadow-none hover:bg-primary hover:text-white transition-all duration-300 ease-in-out hidden lg:inline-block"
+          >
+            <Link href={"/login"}>
+              {" "}
+              <span>LOGIN/SIGNUP</span>
+            </Link>
+          </Button>
+        )}
         <IconButton
           variant="text"
           className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -97,14 +117,17 @@ export function TopNavbar() {
           )}
         </IconButton>
       </div>
-      <MobileNav open={openNav} className="bg-secondary">
-        <div className="container mx-auto">
+      <Collapse open={openNav} className="  bg-secondary pl-10">
+        <div className=" mx-auto">
           {navList}
           <Button className="mb-2 bg-white text-primary">
-            <span>LOGIN/SIGNUP</span>
+            <Link href={"/login"}>
+              {" "}
+              <span>LOGIN/SIGNUP</span>
+            </Link>
           </Button>
         </div>
-      </MobileNav>
+      </Collapse>
     </Navbar>
   );
 }

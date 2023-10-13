@@ -18,3 +18,9 @@
 input:focus {
   outline: none;
 }
+@media (max-width: 560px) {
+  .my-32 {
+    margin: 0.5rem;
+    margin: auto auto;
+  }
+}
