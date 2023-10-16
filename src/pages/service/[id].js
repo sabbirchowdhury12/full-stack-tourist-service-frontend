@@ -1,9 +1,12 @@
+import { Progress } from "@material-tailwind/react";
 import { useRouter } from "next/router";
 import React from "react";
 import Datepicker from "react-tailwindcss-datepicker";
 import RootLayout from "src/components/layout/RootLayout";
 import BookingService from "src/components/ui/BookingService";
 import DateSection from "src/components/ui/DateSection";
+import ReviewAndRating from "src/components/ui/ReviewAndRating";
+import ReviewSection from "src/components/ui/ReviewSection";
 import { useGetSingleServiceQuery } from "src/redux/api/serviceApi";
 
 const ServiceDetails = () => {
@@ -140,6 +143,25 @@ const ServiceDetails = () => {
           </div>
         </div>
       </div>
+
+      <div className="grid md:grid-cols-6">
+        <div className="guest-review md:col-span-2">
+          <p>4.5 </p>
+
+          <span>
+            <p>Execptional</p>
+            <p>2004 reviews</p>
+          </span>
+
+          <p>location</p>
+          <p>9.4</p>
+          <Progress value={25} size="sm" label="Small" color="blue" />
+        </div>
+        <div className="md:col-span-4">
+          <ReviewSection service={service} />
+        </div>
+      </div>
+      <ReviewAndRating id={service?.id} />
     </div>
   );
 };

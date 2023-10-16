@@ -9,10 +9,7 @@ const DatePicker = () => {
     endDate: new Date().setMonth(11),
   });
 
-  console.log(value);
-
   const handleValueChange = (newValue) => {
-    console.log("newValue:", newValue);
     setValue(newValue);
   };
 

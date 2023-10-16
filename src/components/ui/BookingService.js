@@ -8,7 +8,7 @@ import {
 
 const BookingService = ({ id }) => {
   const accessToken = getAccessToken();
-  console.log(accessToken);
+
   const user = getDecodedeAccessToken();
   const [createBooking] = useCreateBookingMutation();
   const [value, setValue] = useState({
@@ -17,12 +17,10 @@ const BookingService = ({ id }) => {
   });
 
   const handleValueChange = (newValue) => {
-    console.log("newValue:", newValue);
     setValue(newValue);
   };
 
   const handleBooking = async () => {
-    console.log("hi");
     const bookingData = {
       date: value,
       serviceId: id,

@@ -26,14 +26,12 @@ const ProfileSeeting = () => {
       address: data?.address,
       contactNo: data?.contactNO,
     };
-    console.log(profileData);
 
     const result = await updateProfile({ id, profileData });
     console.log(result);
   };
 
   const handleChangePassword = async (data) => {
-    console.log(data);
     const { currentPassword, newPassword } = data;
 
     if (data.newPassword !== data.newPasswordAgain) {

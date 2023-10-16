@@ -48,7 +48,6 @@ const ServicesPage = () => {
     setPage(page - 1);
   };
 
-  console.log(page);
   return (
     <div>
       <div className="relative flex w-full max-w-[24rem]">
