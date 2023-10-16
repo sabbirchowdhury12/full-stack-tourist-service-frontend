@@ -13,12 +13,19 @@ export const getLocalStorage = (name) => {
 
 export const getAccessToken = () => {
   if (typeof window !== "undefined") {
-    // Check if we're on the client side
+    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+    return accessToken;
+  }
+  return null;
+};
+
+export const getDecodedeAccessToken = () => {
+  if (typeof window !== "undefined") {
     const accessToken = JSON.parse(localStorage.getItem("accessToken"));
     if (accessToken) {
       const decodedToken = jwt.decode(accessToken);
       return decodedToken;
     }
   }
-  return null; // Return null if localStorage is not available
+  return null;
 };

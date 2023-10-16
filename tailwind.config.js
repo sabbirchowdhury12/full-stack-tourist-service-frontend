@@ -21,6 +21,7 @@ module.exports = withMT({
         secondary: "#051036",
         sub_primary: "#d93025",
         sub_secondary: "#0d2857",
+        deep_primary: "#697488",
       },
     },
   },

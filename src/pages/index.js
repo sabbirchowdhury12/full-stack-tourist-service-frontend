@@ -3,10 +3,12 @@ import Head from "next/head";
 import RootLayout from "src/components/layout/RootLayout";
 import DateSection from "src/components/ui/DateSection";
 import { Hero } from "src/components/ui/Hero";
+import ServiceCard from "src/components/ui/ServiceCard";
+import ServicesSection from "src/components/ui/ServiceSection";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home({ products, categories }) {
+export default function Home() {
   return (
     <>
       <Head>
@@ -21,6 +23,7 @@ export default function Home({ products, categories }) {
 
       <Hero />
       <DateSection />
+      <ServicesSection />
     </>
   );
 }

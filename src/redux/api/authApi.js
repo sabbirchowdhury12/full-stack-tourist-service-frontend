@@ -17,9 +17,27 @@ export const authApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["user"],
+    }),
+    updateProfile: builder.mutation({
+      query: ({ id, ...data }) => ({
+        url: `profile/${id}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+    changePassword: builder.mutation({
+      query: ({ id, ...passwordValue }) => ({
+        url: `change-password/${id}`,
+        method: "POST",
+        body: passwordValue,
+      }),
     }),
   }),
 });
 
-export const { useUserLoginMutation, useCreateUserMutation } = authApi;
+export const {
+  useUserLoginMutation,
+  useCreateUserMutation,
+  useUpdateProfileMutation,
+  useChangePasswordMutation,
+} = authApi;

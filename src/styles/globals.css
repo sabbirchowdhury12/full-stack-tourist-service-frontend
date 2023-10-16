@@ -12,12 +12,13 @@
 }
 
 .my-32 {
-  margin: 2rem;
+  margin: 2rem auto;
 }
 
 input:focus {
   outline: none;
 }
+
 @media (max-width: 560px) {
   .my-32 {
     margin: 0.5rem;
