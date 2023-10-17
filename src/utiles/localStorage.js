@@ -6,11 +6,10 @@ export const setLocalStorage = (name, value) => {
 export const getLocalStorage = (name) => {
   if (typeof window !== "undefined") {
     const result = JSON.parse(localStorage.getItem(name));
-    return result;
+    return result || [];
   }
-  return null;
+  return [];
 };
-
 export const getAccessToken = () => {
   if (typeof window !== "undefined") {
     const accessToken = JSON.parse(localStorage.getItem("accessToken"));

@@ -2,13 +2,19 @@ import { Rating, Button, Input, Textarea } from "@material-tailwind/react";
 
 import React from "react";
 import { useForm } from "react-hook-form";
+import {
+  useCreateRatingMutation,
+  useCreateReviewMutation,
+} from "src/redux/api/serviceApi";
 import { getDecodedeAccessToken } from "src/utiles/localStorage";
 
 const ReviewAndRating = ({ id }) => {
-  console.log(id);
   const { register, handleSubmit } = useForm();
-  //   const user = getDecodedeAccessToken();
-  const handleReview = (data) => {
+
+  const [createReview] = useCreateReviewMutation();
+  const [createRating] = useCreateRatingMutation();
+  const user = getDecodedeAccessToken();
+  const handleReview = async (data) => {
     const reviewData = {
       serviceId: id,
       userId: user.id,
@@ -20,7 +26,9 @@ const ReviewAndRating = ({ id }) => {
       rating: data.rating,
     };
 
-    console.log(reviewData, ratingData);
+    const review = await createReview({ ...reviewData });
+    const rating = await createRating({ ...ratingData });
+    console.log(review, rating);
   };
   return (
     <div>

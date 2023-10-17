@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import Datepicker from "react-tailwindcss-datepicker";
 import { useCreateBookingMutation } from "src/redux/api/bookApi";
 import {
@@ -26,25 +27,21 @@ const BookingService = ({ id }) => {
       serviceId: id,
       userId: user?.id,
     };
-    try {
-      const result = await createBooking(bookingData, {
-        headers: {
-          authorization: `Bearer ${accessToken}`,
+    console.log(bookingData);
 
-          "Content-Type": "application/json",
-        },
-      });
-
-      console.log("Booking response:", result);
-    } catch (error) {
-      console.error("Booking error:", error);
+    const result = await createBooking({ ...bookingData }).unwrap();
+    console.log(result);
+    if (result.success == true) {
+      toast.success(result.message);
+    } else {
+      toast.error("something went wrong");
     }
   };
 
   return (
     <div>
+      <Toaster />;
       <Datepicker value={value} onChange={handleValueChange} />
-
       <button onClick={handleBooking}>Book</button>
     </div>
   );

@@ -11,6 +11,10 @@
   font-family: "Roboto", sans-serif;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .my-32 {
   margin: 2rem auto;
 }

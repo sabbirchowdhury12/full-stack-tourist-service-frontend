@@ -2,10 +2,30 @@ import React from "react";
 import Image from "next/image";
 import { rating } from "@material-tailwind/react";
 import Link from "next/link";
+import { getLocalStorage, setLocalStorage } from "src/utiles/localStorage";
+import toast, { Toaster } from "react-hot-toast";
 
 const ServiceCard = (services) => {
+  const addToCart = (data) => {
+    let serviceCart = getLocalStorage("service-cart") || [];
+
+    const findExistedProduct = serviceCart.find(
+      (service) => service.id == data.id
+    );
+
+    if (serviceCart.length > 0 && findExistedProduct) {
+      toast.error("already add in Cart");
+      return;
+    } else {
+      serviceCart.push(data);
+      toast.success("added to the cart");
+      setLocalStorage("service-cart", serviceCart);
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-20">
+      <Toaster />
       {services?.services?.map((service) => {
         const {
           id,
@@ -45,7 +65,10 @@ const ServiceCard = (services) => {
               <span className="text-deep_primary pt-2">/ per night</span>
             </p>
             <Link href={`/service/${id}`}>Deatails</Link>
-            <div className="absolute top-5 right-5 p-3 rounded-full text-red-700 bg-primary">
+            <div
+              onClick={() => addToCart(service)}
+              className="absolute top-5 right-5 p-3 rounded-full text-red-700 bg-primary"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="24"

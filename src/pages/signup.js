@@ -19,10 +19,6 @@ const SignupPage = () => {
   const [createUser] = useCreateUserMutation();
   const { register, handleSubmit } = useForm();
 
-  if (user) {
-    router.push("/");
-    return;
-  }
   const onSubmit = async (data) => {
     const { name, email, password, confirmPassword } = data;
     setError("");

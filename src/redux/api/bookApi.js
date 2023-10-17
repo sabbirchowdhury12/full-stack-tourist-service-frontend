@@ -24,7 +24,22 @@ export const bookingApi = createApi({
         body: bookingData,
       }),
     }),
+    getBooking: builder.query({
+      query: (statusValue) => ({
+        url: `/booking?statusValue=${statusValue}`,
+      }),
+    }),
+    cancelBooking: builder.mutation({
+      query: (id) => ({
+        url: `/booking/${id}`,
+        method: "PATCH",
+      }),
+    }),
   }),
 });
 
-export const { useCreateBookingMutation } = bookingApi;
+export const {
+  useCreateBookingMutation,
+  useGetBookingQuery,
+  useCancelBookingMutation,
+} = bookingApi;

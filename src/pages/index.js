@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import Head from "next/head";
+import { Toaster } from "react-hot-toast";
 import RootLayout from "src/components/layout/RootLayout";
+import Cart from "src/components/ui/Cart";
 import DateSection from "src/components/ui/DateSection";
 import { Hero } from "src/components/ui/Hero";
 import ServiceCard from "src/components/ui/ServiceCard";
@@ -20,7 +22,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <Toaster />;
       <Hero />
       <DateSection />
       <ServicesSection />

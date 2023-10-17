@@ -110,7 +110,7 @@ const ServicesPage = () => {
           variant="text"
           className="flex items-center gap-2"
           onClick={prev}
-          disabled={active === 1}
+          disabled={page === 1}
         >
           <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous
         </Button>
@@ -125,7 +125,7 @@ const ServicesPage = () => {
           variant="text"
           className="flex items-center gap-2"
           onClick={next}
-          disabled={active === 5}
+          disabled={page === 5}
         >
           Next
           <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
