@@ -6,33 +6,37 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import Link from "next/link";
+import { useRouter } from "next/router";
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import { MultiLevelSidebar } from "src/components/layout/DashBoardLayout";
+import RootLayout from "src/components/layout/RootLayout";
+import { useCreateUserMutation } from "src/redux/api/authApi";
 import { useCreateServiceMutation } from "src/redux/api/serviceApi";
 
-const CreateService = () => {
-  const [statusValue, setStatusValue] = useState("upcoming");
-  const [createService] = useCreateServiceMutation();
-  const { register, handleSubmit } = useForm();
+const CreateUser = () => {
+  const [createUser] = useCreateUserMutation();
+  const { register, handleSubmit, reset } = useForm();
+  const router = useRouter();
   const onSubmit = async (data) => {
-    const { service_name, category, location, price, image, status } = data;
-    const serviceData = {
-      service_name,
-      category,
-      location,
-      price: parseInt(price),
+    const { name, email, password, address, contactNo, image } = data;
+    const userData = {
+      name,
+      email,
+      password,
+      address,
+      contactNo,
       image,
-      status: statusValue,
     };
 
-    console.log(serviceData);
-
-    const result = await createService({ ...serviceData }).unwrap();
+    const result = await createUser(userData).unwrap();
     console.log(result);
     if (result.success == true) {
       toast.success(result.message);
+      reset();
+      router.push("/dashboard/user-manage");
     } else {
       toast.error("something went wrong");
     }
@@ -55,40 +59,45 @@ const CreateService = () => {
         >
           <div className="mb-4 flex flex-col gap-6">
             <Input
+              color="blue"
               size="lg"
-              label="Service Name"
-              {...register("service_name", { required: true })}
+              label="Name"
+              {...register("name", { required: true })}
             />
             <Input
+              type="email"
+              color="blue"
               size="lg"
-              label="Category"
-              {...register("category", { required: true })}
+              label="Email"
+              {...register("email", { required: true })}
             />
             <Input
+              color="blue"
               size="lg"
-              label="Location" // Corrected label
-              {...register("location", { required: true })} // Corrected field name
+              label="Password" // Corrected label
+              {...register("password", { required: true })} // Corrected field name
             />
             <Input
-              type="number"
+              color="blue"
+              type="text"
               size="lg"
-              label="Price"
-              {...register("price", { required: true })}
+              label="Address"
+              {...register("address", { required: true })}
             />
             <Input
+              color="blue"
+              type="text"
+              size="lg"
+              label="Contact NO"
+              {...register("contactNo", { required: true })}
+            />
+            <Input
+              color="blue"
               type="text"
               size="lg"
               label="Image URL"
               {...register("image", { required: true })}
             />
-            <Select
-              onChange={(selectedValue) => setStatusValue(selectedValue)} // Update this line
-              color="blue"
-              label="Select Version"
-            >
-              <Option value="upcoming">Upcoming</Option>
-              <Option value="available">Available</Option>
-            </Select>
           </div>
 
           <Button
@@ -96,18 +105,19 @@ const CreateService = () => {
             fullWidth
             type="submit"
           >
-            Sign Up
+            Create User
           </Button>
-          <Typography color="gray" className="mt-4 text-center font-normal">
-            Already have an account?{" "}
-            <Link href="/login" className="font-medium text-primary">
-              Create Service
-            </Link>
-          </Typography>
         </form>
       </div>
     </Card>
   );
 };
 
-export default CreateService;
+export default CreateUser;
+CreateUser.getLayout = function getLayout(page) {
+  return (
+    <RootLayout>
+      <MultiLevelSidebar>{page}</MultiLevelSidebar>
+    </RootLayout>
+  );
+};

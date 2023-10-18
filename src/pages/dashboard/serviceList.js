@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { MultiLevelSidebar } from "src/components/layout/DashBoardLayout";
 import RootLayout from "src/components/layout/RootLayout";
 import {
+  useDeleteServiceMutation,
   useGetCategoryServiceQuery,
   useGetServiceQuery,
 } from "src/redux/api/serviceApi";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
@@ -22,11 +23,11 @@ import {
   Avatar,
   IconButton,
   Tooltip,
-  useSelect,
 } from "@material-tailwind/react";
 import formatDate from "src/utiles/formatedDate";
 import Link from "next/link";
-import CreateService from "./service/create-service";
+import CreateService from "src/components/ui/CreateService";
+import toast, { Toaster } from "react-hot-toast";
 
 const TABS = [
   {
@@ -43,7 +44,7 @@ const TABS = [
   },
 ];
 
-const TABLE_HEAD = ["Service Name", "Location", "Status", "Edit"];
+const TABLE_HEAD = ["Service Name", "Location", "Status", "Edit", "Delete"];
 
 const TABLE_ROWS = [
   {
@@ -97,11 +98,22 @@ const ServiceList = () => {
   const [addService, setAddService] = useState(false);
 
   const { data, error } = useGetCategoryServiceQuery(serachValue);
-  console.log(data?.data);
-  if (error) {
-    console.error("Error:", error);
-    return <div>Error loading data</div>;
-  }
+  const [deleteService] = useDeleteServiceMutation();
+
+  const handleDeleteService = async (id) => {
+    const isConfirmed = confirm("are you sure to delete this service");
+    if (isConfirmed) {
+      const result = await deleteService(id).unwrap();
+      console.log(result);
+      if (result.success == true) {
+        toast.success(result.message);
+      } else {
+        toast.error("something went wrong");
+      }
+    } else {
+      return;
+    }
+  };
 
   return (
     <div>
@@ -109,6 +121,7 @@ const ServiceList = () => {
         <CreateService />
       ) : (
         <Card className="h-full w-full">
+          <Toaster />
           <CardHeader floated={false} shadow={false} className="rounded-none">
             <div className="mb-8 flex items-center justify-between gap-8">
               <div>
@@ -183,7 +196,7 @@ const ServiceList = () => {
                     {
                       service_name,
                       id,
-                      img,
+                      image,
                       location,
                       createdAt,
                       date,
@@ -203,7 +216,7 @@ const ServiceList = () => {
                       <tr key={id}>
                         <td className={classes}>
                           <div className="flex items-center gap-3">
-                            <Avatar src={img} alt={service_name} size="sm" />
+                            <Avatar src={image} alt={service_name} size="sm" />
                             <div className="flex flex-col">
                               <Typography
                                 variant="small"
@@ -236,7 +249,7 @@ const ServiceList = () => {
                               color="blue-gray"
                               className="font-normal opacity-70"
                             >
-                              {service_name}
+                              {location}
                             </Typography>
                           </div>
                         </td>
@@ -254,11 +267,24 @@ const ServiceList = () => {
                         </td>
 
                         <td className={classes}>
-                          <Tooltip content="Edit User">
-                            <IconButton variant="text">
-                              <PencilIcon className="h-4 w-4" />
-                            </IconButton>
+                          <Tooltip content="Edit Service">
+                            <Link
+                              href={`/dashboard/service/edit-service/${id}`}
+                            >
+                              <IconButton variant="text">
+                                <PencilIcon className="h-4 w-4" />
+                              </IconButton>
+                            </Link>
                           </Tooltip>
+                        </td>
+                        <td className={classes}>
+                          <button onClick={() => handleDeleteService(id)}>
+                            <Tooltip content="Delete Service">
+                              <IconButton variant="text">
+                                <TrashIcon className="h-4 w-4" />
+                              </IconButton>
+                            </Tooltip>
+                          </button>
                         </td>
                       </tr>
                     );

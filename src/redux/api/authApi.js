@@ -5,6 +5,7 @@ export const authApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000/api/v1",
+
     prepareHeaders: (headers) => {
       const accessToken = getAccessToken();
 
@@ -15,6 +16,7 @@ export const authApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["gettusers"],
   endpoints: (builder) => ({
     userLogin: builder.mutation({
       query: (data) => ({
@@ -24,17 +26,18 @@ export const authApi = createApi({
       }),
     }),
     createUser: builder.mutation({
-      query: (data) => ({
+      query: (userData) => ({
         url: `auth/signup`,
         method: "POST",
-        body: data,
+        body: userData,
       }),
+      invalidatesTags: ["gettusers"],
     }),
     updateProfile: builder.mutation({
-      query: ({ id, ...data }) => ({
+      query: ({ id, userData }) => ({
         url: `profile/${id}`,
-        method: "POST",
-        body: data,
+        method: "PATCH",
+        body: userData,
       }),
     }),
     changePassword: builder.mutation({
@@ -44,6 +47,19 @@ export const authApi = createApi({
         body: passwordValue,
       }),
     }),
+
+    getAlluser: builder.query({
+      query: () => ({
+        url: `/get-users`,
+      }),
+      providesTags: ["gettusers"],
+    }),
+    getSingleuser: builder.query({
+      query: (id) => ({
+        url: `/profile/${id}`,
+      }),
+      providesTags: ["gettusers"],
+    }),
   }),
 });
 
@@ -52,4 +68,6 @@ export const {
   useCreateUserMutation,
   useUpdateProfileMutation,
   useChangePasswordMutation,
+  useGetAlluserQuery,
+  useGetSingleuserQuery,
 } = authApi;

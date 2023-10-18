@@ -33,27 +33,27 @@ const DateSection = () => {
   };
 
   return (
-    <div className="w-4/5 mb-48 bg-white  mx-auto border mt-5 shadow-xl p-5 rounded-3xl flex justify-between flex-col lg:flex-row jost-font">
-      <div className=" font-medium mb-4 lg:mb-0 border-b lg:border-r lg:border-b-0 lg:border-primary pb-2 lg:pb-0">
+    <div className="w-4/5  bg-white  mx-auto border mt-5 shadow-xl  rounded flex justify-between flex-col lg:flex-row lg:py-4">
+      <div className=" p-5 font-medium mb-4 lg:mb-0 border-b-2 lg:border-r lg:border-b-0  pb-2 lg:pb-0">
         <p className={titleStyle}>Location</p>
         <input
           type="text"
-          className="border-black text-sm py-1 mt-1"
+          className="border-black text-sm py-1 mt-1 placeholder:text-deep_primary"
           placeholder="Where you want to go?"
         />
       </div>
       <div
         className={
-          "font-medium mb-4 lg:mb-0 border-b lg:border-r lg:border-b-0 lg:border-primary pb-2 lg:pb-0"
+          " p-5 font-medium mb-4 lg:mb-0 border-b-2 lg:border-r lg:border-b-0  pb-2 lg:pb-0"
         }
       >
         <p className={`${titleStyle} lg:pl-4`}>Check in - Check out</p>{" "}
         <DatePicker />{" "}
       </div>
-      <div className="relative">
+      <div className="relative p-5   lg:mb-0  pb-4 lg:pb-0">
         <div onClick={() => setGuest(!guest)}>
           <p className={titleStyle}>Guest</p>
-          <p className="text-gray-400 mt-4 text-sm jost-font">
+          <p className="text-deep_primary mt-4 text-sm ">
             {adults} Adults - {children} Childrens - {rooms} Rooms
           </p>
         </div>
@@ -115,6 +115,21 @@ const DateSection = () => {
             </div>
           </div>
         )}
+      </div>
+      <div className="flex items-center justify-center  gap-2 bg-sub_primary p-5 text-center text-white font-semibold ">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm-8 6a8 8 0 1 1 14.32 4.906l5.387 5.387a1 1 0 0 1-1.414 1.414l-5.387-5.387A8 8 0 0 1 2 10z"
+            fill="#FFF"
+          />
+        </svg>
+        <span> Search</span>
       </div>
     </div>
   );

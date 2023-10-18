@@ -4,8 +4,14 @@ function useUserFromLocalStorage() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    setUser(user);
+    const accessToken = localStorage.getItem("accessToken");
+
+    if (accessToken) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      setUser(user);
+    } else {
+      setUser(null);
+    }
   }, []);
 
   return user;

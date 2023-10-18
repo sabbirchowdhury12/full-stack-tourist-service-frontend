@@ -13,6 +13,10 @@ export const generateSidebarItems = (role) => {
   ];
   const adminSidebar = [
     {
+      href: `/dashboard/user-manage`,
+      label: "user manage",
+    },
+    {
       href: `/dashboard/seeting`,
       label: "Profile Seeting",
     },

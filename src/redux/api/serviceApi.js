@@ -15,6 +15,7 @@ export const serviceApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["service"],
   endpoints: (builder) => ({
     createService: builder.mutation({
       query: (serviceData) => ({
@@ -34,10 +35,19 @@ export const serviceApi = createApi({
       }),
     }),
 
+    updateService: builder.mutation({
+      query: ({ id, serviceData }) => ({
+        url: `service/${id}`,
+        method: "PATCH",
+        body: serviceData,
+      }),
+    }),
+
     getCategoryService: builder.query({
       query: (searchValue) => ({
         url: `/service/category?searchValue=${searchValue}`,
       }),
+      providesTags: ["service"],
     }),
 
     createReview: builder.mutation({
@@ -54,6 +64,13 @@ export const serviceApi = createApi({
         body: ratingData,
       }),
     }),
+    deleteService: builder.mutation({
+      query: (id) => ({
+        url: `service/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["service"],
+    }),
   }),
 });
 
@@ -64,4 +81,6 @@ export const {
   useCreateReviewMutation,
   useCreateRatingMutation,
   useCreateServiceMutation,
+  useUpdateServiceMutation,
+  useDeleteServiceMutation,
 } = serviceApi;

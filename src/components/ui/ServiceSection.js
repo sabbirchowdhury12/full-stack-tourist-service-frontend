@@ -1,8 +1,11 @@
-import { useGetAvailableServiceQuery } from "src/redux/api/serviceApi";
+import {
+  useGetAvailableServiceQuery,
+  useGetCategoryServiceQuery,
+} from "src/redux/api/serviceApi";
 import ServiceCard from "./ServiceCard";
 
 const ServicesSection = () => {
-  const { data } = useGetAvailableServiceQuery();
+  const { data } = useGetCategoryServiceQuery("available");
 
   return (
     <div>
