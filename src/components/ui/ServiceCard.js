@@ -5,7 +5,7 @@ import Link from "next/link";
 import { getLocalStorage, setLocalStorage } from "src/utiles/localStorage";
 import toast, { Toaster } from "react-hot-toast";
 
-const ServiceCard = (services) => {
+const ServiceCard = ({ services }) => {
   const addToCart = (data) => {
     let serviceCart = getLocalStorage("service-cart") || [];
 
@@ -26,7 +26,7 @@ const ServiceCard = (services) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-20">
       <Toaster />
-      {services?.services?.map((service) => {
+      {services?.map((service) => {
         const {
           id,
           service_name,
@@ -38,40 +38,48 @@ const ServiceCard = (services) => {
         } = service;
 
         return (
-          <div className="relative" key={id}>
-            <img
-              className="h-96 w-full"
-              src="https://gotrip-appdir.vercel.app/_next/image?url=%2Fimg%2Fhotels%2F2.png&w=384&q=75"
-              alt=""
-              srcset=""
-            />
-            <p className="text-deep-primary my-2">{location}</p>
+          <div className="relative group " key={id}>
+            <div className="h-96 rounded relative overflow-hidden">
+              <img
+                className="h-full w-full transition-transform duration-500 transform origin-center group-hover:scale-110"
+                src="https://gotrip-appdir.vercel.app/_next/image?url=%2Fimg%2Fhotels%2F2.png&w=384&q=75"
+                alt=""
+              />
+            </div>
+            <p className="text-deep_primary my-2">{location}</p>
 
-            <p className="font-medium my-2">{service_name} </p>
-            <p className="text-deep_primary my-2">
+            <p className="font-medium my-2 text-xl">{service_name} </p>
+            <p className="text-deep_primary my-2 text-sm">
               2 guests - 1 bedroom - 1 bed
             </p>
             <p className="my-4 text-sm">
-              <span className="bg-primary text-white p-2 rounded ">
-                {ratings}
+              <span className="bg-sub_primary font-bold text-white p-2 rounded ">
+                {/* {ratings?.length ? ratings : "4.8"} */}
+                {"4.8"}
               </span>{" "}
               <span className="text-deep_primary">
                 {" "}
-                execptoonal {reviews} reciews
+                <span className="mx-4">{category}</span>{" "}
+                {/* {reviews?.length ? reviews : "100 reviews"} */}
+                {"100 reviews"}
               </span>
             </p>
-            <p>
-              <span className="font-semibold">Us{price}</span>{" "}
-              <span className="text-deep_primary pt-2">/ per night</span>
-            </p>
-            <Link href={`/service/${id}`}>Deatails</Link>
+            <div className="flex items-center my-2 gap-1">
+              <span className="font-semibold text-xl">US{price}</span>{" "}
+              <p className="text-deep_primary pt-1 text-sm">/ per night</p>
+            </div>
+            <Link href={`/service/${id}`}>
+              <div className="text-center bg-primary hover:bg-secondary rounded mt-2 w-4/5 mx-auto text-white p-2 font-semibold text-xs">
+                MORE ABOUT SERVICE
+              </div>
+            </Link>
             <div
               onClick={() => addToCart(service)}
-              className="absolute top-5 right-5 p-3 rounded-full text-red-700 bg-primary"
+              className="absolute top-5 right-5  h-10 w-10 flex items-center justify-center rounded-full bg-sub_primary"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                height="24"
+                height="32"
                 viewBox="0 0 24 24"
                 width="24"
               >

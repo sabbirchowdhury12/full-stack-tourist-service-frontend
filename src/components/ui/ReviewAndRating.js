@@ -2,6 +2,7 @@ import { Rating, Button, Input, Textarea } from "@material-tailwind/react";
 
 import React from "react";
 import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 import {
   useCreateRatingMutation,
   useCreateReviewMutation,
@@ -9,7 +10,7 @@ import {
 import { getDecodedeAccessToken } from "src/utiles/localStorage";
 
 const ReviewAndRating = ({ id }) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const [createReview] = useCreateReviewMutation();
   const [createRating] = useCreateRatingMutation();
@@ -26,20 +27,32 @@ const ReviewAndRating = ({ id }) => {
       rating: data.rating,
     };
 
-    const review = await createReview({ ...reviewData });
-    const rating = await createRating({ ...ratingData });
-    console.log(review, rating);
+    try {
+      const review = await createReview({ ...reviewData }).unwrap();
+      const rating = await createRating({ ...ratingData });
+      console.log(review, rating);
+      if (review.success === true) {
+        toast.success(review.message);
+        reset();
+      } else {
+        toast.error("Something went wrong");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred.");
+    }
   };
   return (
     <div>
+      <Toaster />
       <div className="submit-review grid md:grid-col-6">
-        <div className="md:grid-cols-2">
+        {/* <div className="md:grid-cols-2">
           <p>location</p>
           <Rating value={5} readonly />;<p>location</p>
           <Rating value={5} readonly />;<p>location</p>
           <Rating value={5} readonly />;<p>location</p>
           <Rating value={5} readonly />;
-        </div>
+        </div> */}
         <div className="grid-col-4"></div>
       </div>
 
@@ -52,7 +65,7 @@ const ReviewAndRating = ({ id }) => {
             size="lg"
             type="number"
             label="rating"
-            {...register("rating")}
+            {...register("rating", { required: true })}
           />
           <Textarea
             type="text"
@@ -67,7 +80,7 @@ const ReviewAndRating = ({ id }) => {
           fullWidth
           type="submit"
         >
-          Login
+          Review
         </Button>
       </form>
     </div>

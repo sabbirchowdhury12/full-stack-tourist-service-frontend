@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RootLayout from "src/components/layout/RootLayout";
 import ServiceCard from "src/components/ui/ServiceCard";
 import { useGetServiceQuery } from "src/redux/api/serviceApi";
 import { Input, IconButton, Button } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useForm } from "react-hook-form";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 const ServicesPage = () => {
   const [searchValue, setSearchValue] = React.useState("");
   const [minPrice, setMinPrice] = React.useState(1);
   const [maxPrice, setMaxPrice] = React.useState(10000000);
   const [sortBy, setSortBy] = React.useState("createdAt");
   const [page, setPage] = React.useState(1);
-  const [limit, setlimit] = React.useState(3);
+  const [limit, setlimit] = React.useState(10);
+
+  const [totalPage, setTotalPage] = useState("");
 
   const { register, handleSubmit } = useForm();
   const { data } = useGetServiceQuery({
@@ -22,6 +25,11 @@ const ServicesPage = () => {
     page,
     limit,
   });
+
+  useEffect(() => {
+    setTotalPage(data?.meta?.totalPage);
+  }, [data]);
+
   const onChange = ({ target }) => setSearchValue(target.value);
   const handleFilter = async (data) => {
     setMinPrice(data.minPrice);
@@ -37,7 +45,7 @@ const ServicesPage = () => {
   });
 
   const next = () => {
-    if (page === 5) return;
+    if (page === totalPage) return;
 
     setPage(page + 1);
   };
@@ -51,7 +59,8 @@ const ServicesPage = () => {
   return (
     <div>
       <div className="relative flex w-full max-w-[24rem]">
-        <Input
+        {/* <Input
+          color="blue"
           type="text"
           label="search by name, location and category"
           onChange={onChange}
@@ -59,77 +68,113 @@ const ServicesPage = () => {
           containerProps={{
             className: "min-w-0",
           }}
+        /> */}
+
+        <Input
+          onChange={onChange}
+          color="blue"
+          label="search by name, location and category"
+          icon={<MagnifyingGlassIcon className="h-5 w-5" />}
         />
       </div>
-      <form className="mt-8 mb-2  " onSubmit={handleSubmit(handleFilter)}>
-        <div className="mb-4 flex  items-center gap-2 w-20">
-          <Input
-            type="number"
-            labelProps={{
-              className: "hidden",
-            }}
-            className="!border !border-gray-300 bg-white text-gray-900 shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 "
-            placeholder="100"
-            {...register("minPrice", { required: true })}
-          />
-          <span>to</span>
-          <Input
-            type="number"
-            labelProps={{
-              className: "hidden",
-            }}
-            className="!border !border-gray-300 bg-white text-gray-900 shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 "
-            placeholder="100"
-            {...register("maxPrice", { required: true })}
-          />
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-2">
+        <form className="mt-8 mb-2  " onSubmit={handleSubmit(handleFilter)}>
+          <p className="text-deep_primary font-semibold pl-2 mb-2">
+            Filter by Price:
+          </p>
+          <div className="mb-4 flex  items-center gap-2 w-20">
+            <Input
+              type="number"
+              labelProps={{
+                className: "hidden",
+              }}
+              className="!border !border-gray-300 bg-white text-gray-900 shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 "
+              placeholder="100"
+              {...register("minPrice", { required: true })}
+            />
+            <span>to</span>
+            <Input
+              type="number"
+              labelProps={{
+                className: "hidden",
+              }}
+              className="!border !border-gray-300 bg-white text-gray-900 shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 "
+              placeholder="100"
+              {...register("maxPrice", { required: true })}
+            />
 
-          <Button
-            className=" bg-primary hover:bg-secondary"
-            fullWidth
-            type="submit"
+            <Button
+              className=" bg-sub_primary hover:bg-secondary"
+              fullWidth
+              type="submit"
+            >
+              GO
+            </Button>
+          </div>
+        </form>
+
+        <div className="">
+          <p className="text-deep_primary font-semibold  mb-1">Sort by: </p>
+          <select
+            className="border-2 border-secondary p-2"
+            onChange={(e) => setSortBy(e.target.value)}
           >
-            GO
-          </Button>
+            <option value="createAt">CreatedAt</option>
+            <option value="service_name">Name</option>
+            <option value="price">Price</option>
+            <option value="id">id</option>
+          </select>
         </div>
-      </form>
-
-      <div className="flex">
-        <p>Sort by: </p>
-        <select onChange={(e) => setSortBy(e.target.value)}>
-          <option value="createAt">CreatedAt</option>
-          <option value="service_name">Name</option>
-          <option value="price">Price</option>
-          <option value="id">id</option>
-        </select>
       </div>
 
       <ServiceCard services={data?.data} />
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center flex-wrap gap-4 justify-center my-20">
         <Button
           variant="text"
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 text-primary"
           onClick={prev}
           disabled={page === 1}
         >
           <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous
         </Button>
-        <div className="flex items-center gap-2">
-          <IconButton {...getItemProps(1)}>1</IconButton>
-          <IconButton {...getItemProps(2)}>2</IconButton>
-          <IconButton {...getItemProps(3)}>3</IconButton>
-          <IconButton {...getItemProps(4)}>4</IconButton>
-          <IconButton {...getItemProps(5)}>5</IconButton>
+        <div className="flex items-center gap-2 flex-wrap ">
+          {Array.from({ length: totalPage }).map((_, index) => (
+            <IconButton key={index} {...getItemProps(index + 1)}>
+              {index + 1}
+            </IconButton>
+          ))}
         </div>
         <Button
           variant="text"
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 text-primary"
           onClick={next}
-          disabled={page === 5}
+          disabled={page === totalPage}
         >
           Next
           <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
         </Button>
+
+        <select
+          onChange={(e) => setlimit(e.target.value)}
+          className="border border-primary p-1"
+          name="select"
+          value={limit}
+          id="select"
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="4">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option selected value="10">
+            10
+          </option>
+        </select>
       </div>
     </div>
   );

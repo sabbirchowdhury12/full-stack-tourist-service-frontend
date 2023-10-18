@@ -15,7 +15,7 @@ export const serviceApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["service"],
+  tagTypes: ["service", "review"],
   endpoints: (builder) => ({
     createService: builder.mutation({
       query: (serviceData) => ({
@@ -33,6 +33,7 @@ export const serviceApi = createApi({
       query: (id) => ({
         url: `/service/${id}`,
       }),
+      providesTags: ["review"],
     }),
 
     updateService: builder.mutation({
@@ -56,6 +57,7 @@ export const serviceApi = createApi({
         method: "POST",
         body: reviewData,
       }),
+      invalidatesTags: ["review"],
     }),
     createRating: builder.mutation({
       query: (ratingData) => ({
@@ -63,6 +65,7 @@ export const serviceApi = createApi({
         method: "POST",
         body: ratingData,
       }),
+      invalidatesTags: ["review"],
     }),
     deleteService: builder.mutation({
       query: (id) => ({

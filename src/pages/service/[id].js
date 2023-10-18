@@ -1,4 +1,5 @@
 import { Progress } from "@material-tailwind/react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React from "react";
 import Datepicker from "react-tailwindcss-datepicker";
@@ -8,6 +9,7 @@ import DateSection from "src/components/ui/DateSection";
 import ReviewAndRating from "src/components/ui/ReviewAndRating";
 import ReviewSection from "src/components/ui/ReviewSection";
 import { useGetSingleServiceQuery } from "src/redux/api/serviceApi";
+import { reviewsData, serviceFreaturesData } from "src/utiles/data";
 
 const ServiceDetails = () => {
   const router = useRouter();
@@ -51,11 +53,7 @@ const ServiceDetails = () => {
       </span>
 
       <div className="image my-20 grid grid-cols-1 lg:grid-cols-2  gap-2 ">
-        <img
-          className="w-full h-[456px]"
-          src="https://gotrip-appdir.vercel.app/_next/image?url=%2Fimg%2Frentals%2Fsingle%2F2.png&w=640&q=75"
-          alt=""
-        />
+        <img className="w-full h-[456px]" src={service?.image} alt="" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className="div grid grid-cols-1 gap-2">
             <img
@@ -63,11 +61,7 @@ const ServiceDetails = () => {
               src="https://gotrip-appdir.vercel.app/_next/image?url=%2Fimg%2Frentals%2Fsingle%2F2.png&w=640&q=75"
               alt=""
             />
-            <img
-              className="h-56 w-full"
-              src="https://gotrip-appdir.vercel.app/_next/image?url=%2Fimg%2Frentals%2Fsingle%2F2.png&w=640&q=75"
-              alt=""
-            />{" "}
+            <img className="h-56 w-full" src={service?.image} alt="" />{" "}
           </div>
           <div className="div grid grid-cols-1 gap-2">
             <img
@@ -84,21 +78,29 @@ const ServiceDetails = () => {
         </div>
       </div>
 
-      <div className="details grid lg:grid-cols-5 gap-4">
+      <div className="details grid lg:grid-cols-6 gap-6">
         <div className="overview col-span-4 ">
           <div className="property">
-            <p className="text-lg  pb-5">Property hinglights</p>
+            <p className=" font-semibold pb-5 text-deep_primary uppercase">
+              Property hinglights
+            </p>
             <div className="flex justify-between w-full grid-col-4 border-b pb-10">
-              <span>Bedrooms</span>
-              <span>Bedrooms</span>
-              <span>Bedrooms</span>
-              <span>Bedrooms</span>
+              {serviceFreaturesData.map((data) => {
+                return (
+                  <div className="flex items-center gap-2">
+                    {data.svg}
+                    <span>{data.name}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
           <div>
-            <p className="my-10">OverView</p>
-            <p className="text-sm italic leading-7 border-b pb-10">
+            <p className="my-10 uppercase font-semibold text-deep_primary">
+              OverView
+            </p>
+            <p className="text-sm italic leading-10 tracking-wider border-b pb-10">
               You can directly book the best price if your travel dates are
               available, all discounts are already included. In the following
               house description you will find all information about our listing.{" "}
@@ -107,55 +109,41 @@ const ServiceDetails = () => {
               furnishings: 1 room with 1 french bed and radio. Shower, sep. WC.
               Upper floor: (steep stair) living/dining room with 1 sofabed (110
               cm, length 180 cm), TV. Exit to the balcony. Small kitchen 2 hot
-              plates, oven,
+              plates, oven, <span className="text-primary">see more</span>
             </p>
-          </div>
-
-          <div className="my-10">
-            <p className="my-10 text-lg">amentites</p>
-            <span className="grid grid-cols-2">
-              <div className="left">
-                <p className="my-2">Noon-smoking rooms</p>
-                <p className="my-2">Noon-smoking rooms</p>
-                <p className="my-2">Noon-smoking rooms</p>
-                <p className="my-2">Noon-smoking rooms</p>
-                <p className="my-2">Noon-smoking rooms</p>
-                <p className="my-2">Noon-smoking rooms</p>
-                <p className="my-2">Noon-smoking rooms</p>
-              </div>
-              <div className="left">
-                <p className="my-2">Noon-smoking rooms</p>
-                <p className="my-2">Noon-smoking rooms</p>
-                <p className="my-2">Noon-smoking rooms</p>
-                <p className="my-2">Noon-smoking rooms</p>
-                <p className="my-2">Noon-smoking rooms</p>
-                <p className="my-2">Noon-smoking rooms</p>
-                <p className="my-2">Noon-smoking rooms</p>
-              </div>
-            </span>
           </div>
         </div>
 
-        <div className="date col-span-1">
-          <div className="border border-primary h-52 ">
-            date
-            <BookingService id={service?.id} />
+        <div className="date col-span-4 lg:col-span-2">
+          <div className="border border-primary  ">
+            <BookingService service={service} />
           </div>
         </div>
       </div>
 
-      <div className="grid md:grid-cols-6">
+      <div className="grid md:grid-cols-6 my-20">
         <div className="guest-review md:col-span-2">
-          <p>4.5 </p>
+          <div className="flex gap-4 items-center">
+            <p className="text-xl p-2 font-bold bg-primary rounded text-white">
+              4.5{" "}
+            </p>
 
-          <span>
-            <p>Execptional</p>
-            <p>2004 reviews</p>
-          </span>
-
-          <p>location</p>
-          <p>9.4</p>
-          <Progress value={25} size="sm" label="Small" color="blue" />
+            <span className="text-sm">
+              <p>Execptional</p>
+              <p className="text-deep_primary">2004 reviews</p>
+            </span>
+          </div>
+          {reviewsData.map((data) => {
+            return (
+              <div className="my-4">
+                <div className="flex justify-between my-2 items-center">
+                  <p className="capitalize">{data?.name}</p>
+                  <p>{data?.rating}</p>
+                </div>
+                <Progress value={75} size="sm" color="black" />
+              </div>
+            );
+          })}
         </div>
         <div className="md:col-span-4">
           <ReviewSection service={service} />
