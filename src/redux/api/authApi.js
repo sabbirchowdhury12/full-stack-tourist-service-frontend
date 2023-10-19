@@ -4,7 +4,8 @@ import { getAccessToken } from "src/utiles/localStorage";
 export const authApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/v1",
+    baseUrl:
+      "https://fullstach-service-provider-backend-g43w62oly-sabbirchowdhury12.vercel.app/api/v1",
 
     prepareHeaders: (headers) => {
       const accessToken = getAccessToken();
@@ -34,10 +35,10 @@ export const authApi = createApi({
       invalidatesTags: ["gettusers"],
     }),
     updateProfile: builder.mutation({
-      query: ({ id, userData }) => ({
+      query: ({ id, profileData }) => ({
         url: `profile/${id}`,
         method: "PATCH",
-        body: userData,
+        body: profileData,
       }),
       invalidatesTags: ["gettusers"],
     }),

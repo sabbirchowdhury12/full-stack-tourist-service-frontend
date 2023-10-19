@@ -13,6 +13,7 @@ import Link from "next/link";
 import { setLocalStorage } from "src/utiles/localStorage";
 import useUserFromLocalStorage from "src/customHooks/useUserFromLocalStorage";
 import { useRouter } from "next/router";
+import toast, { Toaster } from "react-hot-toast";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -26,9 +27,18 @@ const LoginPage = () => {
   }
   const onSubmit = async (data) => {
     console.log(data);
-    const result = await userLogin({ ...data }).unwrap();
-    setLocalStorage("accessToken", result.data.accessToken);
-    setLocalStorage("user", result.data.user);
+
+    try {
+      const result = await userLogin({ ...data }).unwrap();
+
+      setLocalStorage("accessToken", result.data.accessToken);
+      setLocalStorage("user", result.data.user);
+
+      toast.success(result.message);
+      router.push("/");
+    } catch (err) {
+      toast.success("something wrong");
+    }
   };
 
   return (
@@ -37,6 +47,7 @@ const LoginPage = () => {
       className="flex justify-center mx-auto items-center bg-[#E5F0FD] h-screen"
       shadow={false}
     >
+      <Toaster />
       <div className="bg-white p-5 lg:p-10 rounded-md">
         <Typography variant="h4" color="blue-gray" className="text-center">
           LOGIN

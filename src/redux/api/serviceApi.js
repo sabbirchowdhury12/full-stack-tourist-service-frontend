@@ -5,6 +5,8 @@ export const serviceApi = createApi({
   reducerPath: "service",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000/api/v1",
+    // "https://fullstach-service-provider-backend-g43w62oly-sabbirchowdhury12.vercel.app/api/v1",
+
     prepareHeaders: (headers) => {
       const accessToken = getAccessToken();
 
@@ -15,7 +17,7 @@ export const serviceApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["service", "review"],
+  tagTypes: ["service", "review", "getallservice"],
   endpoints: (builder) => ({
     createService: builder.mutation({
       query: (serviceData) => ({
@@ -23,11 +25,13 @@ export const serviceApi = createApi({
         method: "POST",
         body: serviceData,
       }),
+      invalidatesTags: ["getallservice"],
     }),
     getService: builder.query({
-      query: ({ searchValue, minPrice, maxPrice, sortBy, page, limit }) => ({
-        url: `/service?search=${searchValue}&minPrice=${minPrice}&maxPrice=${maxPrice}&sortBy=${sortBy}&limit=${limit}&page=${page}`,
+      query: ({ search, minPrice, maxPrice, sortBy, page, limit }) => ({
+        url: `/service?search=${search}&minPrice=${minPrice}&maxPrice=${maxPrice}&sortBy=${sortBy}&limit=${limit}&page=${page}`,
       }),
+      providesTags: ["getallservice"],
     }),
     getSingleService: builder.query({
       query: (id) => ({

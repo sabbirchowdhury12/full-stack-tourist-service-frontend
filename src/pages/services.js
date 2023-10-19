@@ -5,9 +5,8 @@ import { useGetServiceQuery } from "src/redux/api/serviceApi";
 import { Input, IconButton, Button } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useForm } from "react-hook-form";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 const ServicesPage = () => {
-  const [searchValue, setSearchValue] = React.useState("");
+  const [searchValue, setSearchValue] = React.useState("car");
   const [minPrice, setMinPrice] = React.useState(1);
   const [maxPrice, setMaxPrice] = React.useState(10000000);
   const [sortBy, setSortBy] = React.useState("createdAt");
@@ -18,7 +17,7 @@ const ServicesPage = () => {
 
   const { register, handleSubmit } = useForm();
   const { data } = useGetServiceQuery({
-    searchValue,
+    search: searchValue,
     minPrice,
     maxPrice,
     sortBy,
@@ -26,17 +25,17 @@ const ServicesPage = () => {
     limit,
   });
 
+  console.log(data);
+
+  console.log(searchValue);
   useEffect(() => {
     setTotalPage(data?.meta?.totalPage);
   }, [data]);
 
-  const onChange = ({ target }) => setSearchValue(target.value);
   const handleFilter = async (data) => {
     setMinPrice(data.minPrice);
     setMaxPrice(data.maxPrice);
   };
-
-  //////pagination
 
   const getItemProps = (index) => ({
     variant: page === index ? "filled" : "text",
@@ -59,23 +58,23 @@ const ServicesPage = () => {
   return (
     <div>
       <div className="relative flex w-full max-w-[24rem]">
-        {/* <Input
+        <Input
           color="blue"
           type="text"
           label="search by name, location and category"
-          onChange={onChange}
+          onChange={(e) => setSearchValue(e.target.value)}
           className="pr-20"
           containerProps={{
             className: "min-w-0",
           }}
-        /> */}
+        />
 
-        <Input
+        {/* <Input
           onChange={onChange}
           color="blue"
           label="search by name, location and category"
           icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-        />
+        /> */}
       </div>
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-2">
         <form className="mt-8 mb-2  " onSubmit={handleSubmit(handleFilter)}>

@@ -162,34 +162,34 @@ const UserManage = () => {
                       </Tooltip>
                     </td>
 
-                    {user &&
-                    user?.role == USER_ROLE.SUPER_ADMIN &&
-                    role == USER_ROLE.USER ? (
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal opacity-70"
-                        >
-                          <button
-                            onClick={() => handleMakeAdmin(id)}
-                            className="bg-sub_primary p-2 rounded text-white"
+                    {user && user?.role == USER_ROLE.SUPER_ADMIN ? (
+                      role == USER_ROLE.USER ? (
+                        <td className={classes}>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal opacity-70"
                           >
-                            Make Admin
-                          </button>
-                        </Typography>
-                      </td>
-                    ) : (
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal opacity-70"
-                        >
-                          ADMIN
-                        </Typography>
-                      </td>
-                    )}
+                            <button
+                              onClick={() => handleMakeAdmin(id)}
+                              className="bg-sub_primary p-2 rounded text-white"
+                            >
+                              Make Admin
+                            </button>
+                          </Typography>
+                        </td>
+                      ) : (
+                        <td className={classes}>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal opacity-70"
+                          >
+                            ADMIN
+                          </Typography>
+                        </td>
+                      )
+                    ) : undefined}
                   </tr>
                 );
               }

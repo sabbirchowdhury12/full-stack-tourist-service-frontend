@@ -1,3 +1,9 @@
-### live site
+### Technology
 
-[https://pc-builder-next-js-xi.vercel.app/](https://pc-builder-next-js-xi.vercel.app/)
+#### Frontend
+
+NEXT JS, MATERIAL TAILWIND , REACT HOOK FROM, REDUX RTK QUERY
+
+#### Frontend
+
+EXPRESS, PRISMA , POSTGRES, NODE JS

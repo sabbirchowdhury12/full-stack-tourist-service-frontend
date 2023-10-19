@@ -33,6 +33,7 @@ const ServiceCard = ({ services }) => {
           location,
           price,
           category,
+          image,
           ratings,
           reviews,
         } = service;
@@ -42,7 +43,7 @@ const ServiceCard = ({ services }) => {
             <div className="h-96 rounded relative overflow-hidden">
               <img
                 className="h-full w-full transition-transform duration-500 transform origin-center group-hover:scale-110"
-                src="https://gotrip-appdir.vercel.app/_next/image?url=%2Fimg%2Fhotels%2F2.png&w=384&q=75"
+                src={image}
                 alt=""
               />
             </div>

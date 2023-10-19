@@ -19,8 +19,12 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { MultiLevelSidebar } from "src/components/layout/DashBoardLayout";
 import RootLayout from "src/components/layout/RootLayout";
+import { USER_ROLE } from "src/constants/role";
+import useUserFromLocalStorage from "src/customHooks/useUserFromLocalStorage";
 import {
   useCancelBookingMutation,
+  useConfirmBookingMutation,
+  useCreateBookingMutation,
   useGetBookingQuery,
 } from "src/redux/api/bookApi";
 import formatDate from "src/utiles/formatedDate";
@@ -31,26 +35,49 @@ const TABS = [
     value: "all",
   },
   {
-    label: "Active",
-    value: "active",
+    label: "Pending",
+    value: "pending",
+  },
+  {
+    label: "Confirmed",
+    value: "confirmed",
   },
   {
     label: "Canceled",
-    value: "cancel",
+    value: "canceled",
   },
 ];
 
-const TABLE_HEAD = ["Name", "Service", "Status", ""];
-
 export function BookingList() {
-  const [statusValue, setStatusValue] = useState("all");
+  const [statusValue, setStatusValue] = useState("pending");
+
   console.log(statusValue);
   const { data } = useGetBookingQuery(statusValue);
-  console.log(data);
+
   const [cancelBooking] = useCancelBookingMutation();
+  const [confirmBooking] = useConfirmBookingMutation();
+
+  const TABLE_HEAD = ["Name", "Service", "Status", "Cancel"];
+  const user = useUserFromLocalStorage();
+  if (user?.role == USER_ROLE.SUPER_ADMIN || user?.role == USER_ROLE.ADMIN) {
+    TABLE_HEAD.push("Confirm");
+  }
 
   const handleCancelBooking = async (id) => {
-    const result = await cancelBooking(id).unwrap();
+    const isConfirmed = confirm("are you sure cancel this booking");
+    if (isConfirmed) {
+      const result = await cancelBooking(id).unwrap();
+      console.log(result);
+
+      if (result.success == true) {
+        toast.success(result.message);
+      } else {
+        toast.error("something went wrong");
+      }
+    }
+  };
+  const handleConfirmBooking = async (id) => {
+    const result = await confirmBooking(id).unwrap();
     console.log(result);
 
     if (result.success == true) {
@@ -59,7 +86,6 @@ export function BookingList() {
       toast.error("something went wrong");
     }
   };
-
   return (
     <Card className="h-full w-full">
       <Toaster />
@@ -70,7 +96,7 @@ export function BookingList() {
               Booking list
             </Typography>
             <Typography color="gray" className="mt-1 font-normal">
-              See information about all members
+              See information about all Booking
             </Typography>
           </div>
         </div>
@@ -167,34 +193,83 @@ export function BookingList() {
                       </Typography>
                     </div>
                   </td>
-                  {/* <td className={classes}>
+                  <td className={classes}>
                     <div className="w-max">
                       <Chip
                         variant="ghost"
                         size="sm"
-                        value={active ? "online" : "offline"}
-                        color={active ? "green" : "blue-gray"}
+                        value={
+                          status === "canceled"
+                            ? "canceled"
+                            : status === "confirmed"
+                            ? "confirmed"
+                            : "pending"
+                        }
+                        color={
+                          status === "canceled"
+                            ? "red"
+                            : status === "confirmed"
+                            ? "green"
+                            : "blue-gray"
+                        }
                       />
                     </div>
-                  </td> */}
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal"
-                    >
-                      {status}
-                    </Typography>
                   </td>
+
                   <td className={classes}>
-                    {status && status == "cancel" ? (
-                      <Typography variant="">Canceled</Typography>
+                    {(status && status == "canceled") ||
+                    status == "confirmed" ? (
+                      <Typography variant="">
+                        <button
+                          disabled
+                          className=" text-black p-1 lowercase rounded"
+                        >
+                          {" "}
+                          Canceled
+                        </button>
+                      </Typography>
                     ) : (
                       <button onClick={() => handleCancelBooking(id)}>
-                        <Typography variant="text">Cancel</Typography>
+                        <Typography
+                          className="bg-gray-600 font-normal  text-white p-1 lowercase rounded"
+                          variant="text"
+                        >
+                          Cancel
+                        </Typography>
                       </button>
                     )}
                   </td>
+
+                  {user.role !== USER_ROLE.USER ? (
+                    status == "pending" ? (
+                      <td className={classes}>
+                        <button onClick={() => handleConfirmBooking(id)}>
+                          <div className="flex flex-col">
+                            <Typography
+                              variant="small"
+                              color="blue-gray"
+                              className="bg-gray-600 font-normal text-white p-1 lowercase rounded"
+                            >
+                              Confirm
+                            </Typography>
+                          </div>
+                        </button>
+                      </td>
+                    ) : (
+                      <td className={classes}>
+                        <div className="flex flex-col">
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            disabled
+                            className="font-normal text-blue-gray-500 p-1 lowercase rounded"
+                          >
+                            confirmed
+                          </Typography>
+                        </div>
+                      </td>
+                    )
+                  ) : undefined}
                 </tr>
               );
             })}

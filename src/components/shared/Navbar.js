@@ -9,12 +9,15 @@ import {
 import Link from "next/link";
 import useUserFromLocalStorage from "src/customHooks/useUserFromLocalStorage";
 import Cart from "../ui/Cart";
+import { useRouter } from "next/navigation";
+import { useUserFromContext } from "src/context/UserContext";
 
 export function TopNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
   const [openCart, setOpenCart] = React.useState(false);
-
-  const user = useUserFromLocalStorage();
+  const { user, logout } = useUserFromContext();
+  // const user = useUserFromLocalStorage();
+  const router = useRouter();
 
   React.useEffect(() => {
     window.addEventListener(
@@ -23,8 +26,21 @@ export function TopNavbar() {
     );
   }, []);
 
+  const handleLogout = () => {
+    localStorage.clear();
+    router.push("/login");
+  };
+
   const conditionalBtn = user ? (
     <div className="flex items-center gap-2">
+      <Button
+        onClick={handleLogout}
+        className="bg-white text-primary shadow-none font-normal border border-primary hover:shadow-none hover:bg-primary hover:text-white transition-all duration-300 ease-in-out"
+      >
+        {" "}
+        <span>Log out</span>
+      </Button>
+
       <div className="flex items-center justify-center h-12 w-12 bg-primary rounded-full p-1 first-letter:marker:">
         <svg height="25" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -38,15 +54,15 @@ export function TopNavbar() {
       </span>
     </div>
   ) : (
-    <Button
-      size="lg"
-      className="bg-white text-primary shadow-none font-normal border border-primary hover:shadow-none hover:bg-primary hover:text-white transition-all duration-300 ease-in-out hidden lg:inline-block"
-    >
-      <Link href={"/login"}>
+    <Link href={"/login"}>
+      <Button
+        size="lg"
+        className="bg-white text-primary shadow-none font-normal border border-primary hover:shadow-none hover:bg-primary hover:text-white transition-all duration-300 ease-in-out hidden lg:inline-block"
+      >
         {" "}
         <span>LOGIN/SIGNUP</span>
-      </Link>
-    </Button>
+      </Button>
+    </Link>
   );
 
   const navList = (
@@ -62,7 +78,7 @@ export function TopNavbar() {
         </Link>
       </Typography>
       <Typography as="li" variant="small" className="p-1 text-lg font-normal">
-        <Link href="/blog" className="flex items-center">
+        <Link href="/" className="flex items-center">
           Blog
         </Link>
       </Typography>

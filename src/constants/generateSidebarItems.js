@@ -8,7 +8,7 @@ export const generateSidebarItems = (role) => {
     },
     {
       href: `/dashboard/bookingList`,
-      label: "Profile Seeting",
+      label: "Booking list",
     },
   ];
   const adminSidebar = [

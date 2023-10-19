@@ -4,7 +4,8 @@ import { getAccessToken } from "src/utiles/localStorage";
 export const bookingApi = createApi({
   reducerPath: "book",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/v1",
+    baseUrl:
+      "https://fullstach-service-provider-backend-g43w62oly-sabbirchowdhury12.vercel.app/api/v1",
 
     prepareHeaders: (headers) => {
       const accessToken = getAccessToken();
@@ -28,12 +29,21 @@ export const bookingApi = createApi({
       query: (statusValue) => ({
         url: `/booking?statusValue=${statusValue}`,
       }),
+      providesTags: ["getBooking"],
     }),
     cancelBooking: builder.mutation({
       query: (id) => ({
         url: `/booking/${id}`,
         method: "PATCH",
       }),
+      invalidatesTags: ["getBooking"],
+    }),
+    confirmBooking: builder.mutation({
+      query: (id) => ({
+        url: `/booking/confirm-booking/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["getBooking"],
     }),
   }),
 });
@@ -42,4 +52,5 @@ export const {
   useCreateBookingMutation,
   useGetBookingQuery,
   useCancelBookingMutation,
+  useConfirmBookingMutation,
 } = bookingApi;

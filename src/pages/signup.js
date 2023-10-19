@@ -10,8 +10,9 @@ import {
   useSelect,
 } from "@material-tailwind/react";
 import { setLocalStorage } from "src/utiles/localStorage";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 const SignupPage = () => {
   const router = useRouter();
@@ -22,6 +23,7 @@ const SignupPage = () => {
   const onSubmit = async (data) => {
     const { name, email, password, confirmPassword } = data;
     setError("");
+
     if (password !== confirmPassword) {
       setError("password and confirm password should have matched");
       return;
@@ -33,10 +35,18 @@ const SignupPage = () => {
       password,
     };
 
-    const result = await createUser({ ...userData }).unwrap();
+    try {
+      const result = await createUser({ ...userData }).unwrap();
 
-    setLocalStorage("accessToken", result.data.accessToken);
-    setLocalStorage("user", result.data.user);
+      setLocalStorage("accessToken", result.data.accessToken);
+      setLocalStorage("user", result.data.user);
+      console.log(result);
+      toast.success(result.message);
+      router.push("/");
+    } catch (err) {
+      toast.error("something wrong");
+      console.log(err);
+    }
   };
 
   return (
@@ -45,6 +55,7 @@ const SignupPage = () => {
       className="flex justify-center items-center bg-[#E5F0FD] shadow h-screen"
       shadow={false}
     >
+      <Toaster />
       <div className="bg-white p-5 lg:p-10 rounded-md">
         <Typography variant="h4" color="blue-gray" className="text-center">
           SIGN UP

@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>PC Builder - Home page</title>
+        <title>GoTrip - Home page</title>
         <meta
           name="description"
           content="This is news portal of programming hero made by next-js"
