@@ -1,29 +1,24 @@
 // UserContext.js
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState(null);
-
-  // You can retrieve the user data from localStorage or an API call.
-  useEffect(() => {
-    const userData = localStorage.getItem("user");
-    if (userData) {
-      setUser(JSON.parse(userData));
-    }
-  }, []);
+  const [user, setUser] = useState("");
 
   const logout = () => {
     // Perform the logout logic, e.g., clear local storage.
     localStorage.removeItem("user");
-    setUser(null);
+    setUser("");
+  };
+
+  const userinfo = {
+    user,
+    logout,
   };
 
   return (
-    <UserContext.Provider value={{ user, logout }}>
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={userinfo}>{children}</UserContext.Provider>
   );
 }
 

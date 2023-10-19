@@ -10,13 +10,11 @@ import Link from "next/link";
 import useUserFromLocalStorage from "src/customHooks/useUserFromLocalStorage";
 import Cart from "../ui/Cart";
 import { useRouter } from "next/navigation";
-import { useUserFromContext } from "src/context/UserContext";
 
 export function TopNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
   const [openCart, setOpenCart] = React.useState(false);
-  const { user, logout } = useUserFromContext();
-  // const user = useUserFromLocalStorage();
+  const user = useUserFromLocalStorage();
   const router = useRouter();
 
   React.useEffect(() => {

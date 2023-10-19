@@ -21,14 +21,20 @@ import {
   getDecodedeAccessToken,
 } from "src/utiles/localStorage";
 import { generateSidebarItems } from "src/constants/generateSidebarItems";
+import useUserFromLocalStorage from "src/customHooks/useUserFromLocalStorage";
+import { useRouter } from "next/navigation";
 
 export function MultiLevelSidebar({ children }) {
+  const router = useRouter();
   const [open, setOpen] = React.useState(0);
   const [sidebarItems, setSidebarItems] = useState([]);
 
-  const handleOpen = (value) => {
-    setOpen(open === value ? 0 : value);
-  };
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      router.push("/login");
+    }
+  }, []);
 
   useEffect(() => {
     // This useEffect runs on the client side
@@ -37,8 +43,6 @@ export function MultiLevelSidebar({ children }) {
     console.log(items);
     setSidebarItems(items);
   }, []);
-
-  console.log(sidebarItems);
 
   return (
     <div className="grid grid-cols-5 gap-5">
