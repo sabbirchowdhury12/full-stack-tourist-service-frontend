@@ -39,6 +39,7 @@ export const authApi = createApi({
         method: "PATCH",
         body: userData,
       }),
+      invalidatesTags: ["gettusers"],
     }),
     changePassword: builder.mutation({
       query: ({ id, ...passwordValue }) => ({
@@ -60,6 +61,14 @@ export const authApi = createApi({
       }),
       providesTags: ["gettusers"],
     }),
+
+    makeAdmin: builder.mutation({
+      query: (id) => ({
+        url: `/make-admin/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["gettusers"],
+    }),
   }),
 });
 
@@ -70,4 +79,5 @@ export const {
   useChangePasswordMutation,
   useGetAlluserQuery,
   useGetSingleuserQuery,
+  useMakeAdminMutation,
 } = authApi;

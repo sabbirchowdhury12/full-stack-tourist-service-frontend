@@ -39,7 +39,7 @@ const UpdateUser = () => {
     };
 
     const result = await updateProfile({ id, userData }).unwrap();
-    console.log(result);
+
     if (result.success == true) {
       toast.success(result.message);
       reset();
@@ -57,7 +57,7 @@ const UpdateUser = () => {
       <Toaster />
       <div className="bg-white p-5 lg:p-10 rounded-md">
         <Typography variant="h4" color="blue-gray" className="text-center">
-          UPDATE USER
+          EDIT USER
         </Typography>
         <Typography color="gray" className="mt-1 font-normal"></Typography>
         <form
@@ -68,7 +68,7 @@ const UpdateUser = () => {
             <Input
               color="blue"
               size="lg"
-              label="Service Name"
+              label="User Name"
               defaultValue={data?.data?.name}
               {...register("name", { required: true })}
             />

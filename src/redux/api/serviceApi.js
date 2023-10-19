@@ -42,6 +42,7 @@ export const serviceApi = createApi({
         method: "PATCH",
         body: serviceData,
       }),
+      invalidatesTags: ["service"],
     }),
 
     getCategoryService: builder.query({

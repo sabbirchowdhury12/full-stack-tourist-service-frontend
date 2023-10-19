@@ -19,6 +19,7 @@ import {
 } from "src/redux/api/serviceApi";
 
 const EditService = () => {
+  const [categoryValue, setCategoryValue] = useState("tour");
   const router = useRouter();
   const { id } = router.query;
   const { data } = useGetSingleServiceQuery(id);
@@ -30,7 +31,7 @@ const EditService = () => {
     const { service_name, category, location, price, image, status } = data;
     const serviceData = {
       service_name,
-      category,
+      category: categoryValue,
       location,
       price: parseInt(price),
       image,
@@ -43,6 +44,7 @@ const EditService = () => {
     console.log(result);
     if (result.success == true) {
       toast.success(result.message);
+      router.push("/dashboard/serviceList");
     } else {
       toast.error("something went wrong");
     }
@@ -71,13 +73,16 @@ const EditService = () => {
               defaultValue={data?.data?.service_name}
               {...register("service_name", { required: true })}
             />
-            <Input
+            <Select
+              onChange={(selectedValue) => setCategoryValue(selectedValue)} // Update this line
               color="blue"
-              size="lg"
-              label="Category"
-              defaultValue={data?.data?.category}
-              {...register("category", { required: true })}
-            />
+              label="Select Categoty"
+              value={data?.data?.category}
+            >
+              <Option value="tour">Tour</Option>
+              <Option value="car">Car</Option>
+              <Option value="hotel">Hotel</Option>
+            </Select>
             <Input
               color="blue"
               size="lg"

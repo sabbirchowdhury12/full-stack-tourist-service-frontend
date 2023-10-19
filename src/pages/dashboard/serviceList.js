@@ -116,186 +116,161 @@ const ServiceList = () => {
   };
 
   return (
-    <div>
-      {addService ? (
-        <CreateService />
-      ) : (
-        <Card className="h-full w-full">
-          <Toaster />
-          <CardHeader floated={false} shadow={false} className="rounded-none">
-            <div className="mb-8 flex items-center justify-between gap-8">
-              <div>
-                <Typography variant="h5" color="blue-gray">
-                  Members list
-                </Typography>
-                <Typography color="gray" className="mt-1 font-normal">
-                  See information about all members
-                </Typography>
-              </div>
-              <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                <Button variant="outlined" size="sm">
-                  view all
-                </Button>
-
-                <Button
-                  onClick={() => setAddService(true)}
-                  className="flex items-center gap-3"
-                  size="sm"
+    <Card className="h-full w-full">
+      <Toaster />
+      <CardHeader floated={false} shadow={false} className="rounded-none">
+        <div className="mb-8 flex items-center justify-between gap-8">
+          <div>
+            <Typography variant="h5" color="blue-gray">
+              Serices list
+            </Typography>
+            <Typography color="gray" className="mt-1 font-normal">
+              See information about all Service
+            </Typography>
+          </div>
+          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+            <Link href={"/dashboard/service/create-service"}>
+              <Button
+                onClick={() => setAddService(true)}
+                className="flex items-center gap-3"
+                size="sm"
+              >
+                Add Service
+              </Button>
+            </Link>
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+          <Tabs value="all" className="w-full md:w-max">
+            <TabsHeader>
+              {TABS.map(({ label, value }) => (
+                <Tab
+                  onClick={() => {
+                    setSearchValue(value);
+                  }}
+                  key={value}
+                  value={value}
                 >
-                  Add Service
-                </Button>
-              </div>
-            </div>
-            <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-              <Tabs value="all" className="w-full md:w-max">
-                <TabsHeader>
-                  {TABS.map(({ label, value }) => (
-                    <Tab
-                      onClick={() => {
-                        setSearchValue(value);
-                      }}
-                      key={value}
-                      value={value}
-                    >
-                      &nbsp;&nbsp;{label}&nbsp;&nbsp;
-                    </Tab>
-                  ))}
-                </TabsHeader>
-              </Tabs>
-              <div className="w-full md:w-72">
-                <Input
-                  label="Search"
-                  icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-                />
-              </div>
-            </div>
-          </CardHeader>
-          <CardBody className="overflow-scroll px-0">
-            <table className="mt-4 w-full min-w-max table-auto text-left">
-              <thead>
-                <tr>
-                  {TABLE_HEAD.map((head) => (
-                    <th
-                      key={head}
-                      className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
-                    >
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal leading-none opacity-70"
-                      >
-                        {head}
-                      </Typography>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {data?.data?.map(
-                  (
-                    {
-                      service_name,
-                      id,
-                      image,
-                      location,
-                      createdAt,
-                      date,
-                      status,
-                    },
-                    index
-                  ) => {
-                    const isLast = index === TABLE_ROWS.length - 1;
+                  &nbsp;&nbsp;{label}&nbsp;&nbsp;
+                </Tab>
+              ))}
+            </TabsHeader>
+          </Tabs>
+          <div className="w-full md:w-72">
+            <Input
+              label="Search"
+              icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+            />
+          </div>
+        </div>
+      </CardHeader>
+      <CardBody className="overflow-scroll px-0">
+        <table className="mt-4 w-full min-w-max table-auto text-left">
+          <thead>
+            <tr>
+              {TABLE_HEAD.map((head) => (
+                <th
+                  key={head}
+                  className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
+                >
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal leading-none opacity-70"
+                  >
+                    {head}
+                  </Typography>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data?.data?.map(
+              ({ service_name, id, image, location, price, status }, index) => {
+                const isLast = index === TABLE_ROWS.length - 1;
 
-                    const startDate = formatDate(createdAt);
+                const classes = isLast
+                  ? "p-4"
+                  : "p-4 border-b border-blue-gray-50";
 
-                    const classes = isLast
-                      ? "p-4"
-                      : "p-4 border-b border-blue-gray-50";
+                return (
+                  <tr key={id}>
+                    <td className={classes}>
+                      <div className="flex items-center gap-3">
+                        <Avatar src={image} alt={service_name} size="sm" />
+                        <div className="flex flex-col">
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal"
+                          >
+                            {service_name}
+                          </Typography>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal opacity-70"
+                          >
+                            {location}
+                          </Typography>
+                        </div>
+                      </div>
+                    </td>
+                    <td className={classes}>
+                      <div className="flex flex-col">
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal"
+                        >
+                          {location}
+                        </Typography>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal opacity-70"
+                        >
+                          {price}
+                        </Typography>
+                      </div>
+                    </td>
+                    <td className={classes}>
+                      <div className="w-max">
+                        <Chip
+                          variant="ghost"
+                          size="sm"
+                          value={status ? status : status}
+                          color={status == "upcoming" ? "green" : "blue-gray"}
+                        />
+                      </div>
+                    </td>
 
-                    return (
-                      <tr key={id}>
-                        <td className={classes}>
-                          <div className="flex items-center gap-3">
-                            <Avatar src={image} alt={service_name} size="sm" />
-                            <div className="flex flex-col">
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal"
-                              >
-                                {service_name}
-                              </Typography>
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal opacity-70"
-                              >
-                                {location}
-                              </Typography>
-                            </div>
-                          </div>
-                        </td>
-                        <td className={classes}>
-                          <div className="flex flex-col">
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal"
-                            >
-                              {startDate}
-                            </Typography>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal opacity-70"
-                            >
-                              {location}
-                            </Typography>
-                          </div>
-                        </td>
-                        <td className={classes}>
-                          <div className="w-max">
-                            <Chip
-                              variant="ghost"
-                              size="sm"
-                              value={status ? status : status}
-                              color={
-                                status == "upcoming" ? "green" : "blue-gray"
-                              }
-                            />
-                          </div>
-                        </td>
-
-                        <td className={classes}>
-                          <Tooltip content="Edit Service">
-                            <Link
-                              href={`/dashboard/service/edit-service/${id}`}
-                            >
-                              <IconButton variant="text">
-                                <PencilIcon className="h-4 w-4" />
-                              </IconButton>
-                            </Link>
-                          </Tooltip>
-                        </td>
-                        <td className={classes}>
-                          <button onClick={() => handleDeleteService(id)}>
-                            <Tooltip content="Delete Service">
-                              <IconButton variant="text">
-                                <TrashIcon className="h-4 w-4" />
-                              </IconButton>
-                            </Tooltip>
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  }
-                )}
-              </tbody>
-            </table>
-          </CardBody>
-        </Card>
-      )}
-    </div>
+                    <td className={classes}>
+                      <Tooltip content="Edit Service">
+                        <Link href={`/dashboard/service/edit-service/${id}`}>
+                          <IconButton variant="text">
+                            <PencilIcon className="h-4 w-4" />
+                          </IconButton>
+                        </Link>
+                      </Tooltip>
+                    </td>
+                    <td className={classes}>
+                      <button onClick={() => handleDeleteService(id)}>
+                        <Tooltip content="Delete Service">
+                          <IconButton variant="text">
+                            <TrashIcon className="h-4 w-4" />
+                          </IconButton>
+                        </Tooltip>
+                      </button>
+                    </td>
+                  </tr>
+                );
+              }
+            )}
+          </tbody>
+        </table>
+      </CardBody>
+    </Card>
   );
 };
 

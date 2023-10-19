@@ -52,20 +52,28 @@ export function TopNavbar() {
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography as="li" variant="small" className="p-1 text-lg font-normal">
-        <a href="#" className="flex items-center">
+        <Link href="/" className="flex items-center">
           Home
-        </a>
+        </Link>
       </Typography>
       <Typography as="li" variant="small" className="p-1 text-lg font-normal">
-        <a href="#" className="flex items-center">
-          Service
-        </a>
+        <Link href="/services" className="flex items-center">
+          Services
+        </Link>
       </Typography>
       <Typography as="li" variant="small" className="p-1 text-lg font-normal">
-        <a href="#" className="flex items-center">
+        <Link href="/blog" className="flex items-center">
           Blog
-        </a>
+        </Link>
       </Typography>
+
+      {user && user.email && (
+        <Typography as="li" variant="small" className="p-1 text-lg font-normal">
+          <Link href="/dashboard" className="flex items-center">
+            Dashboard
+          </Link>
+        </Typography>
+      )}
     </ul>
   );
 

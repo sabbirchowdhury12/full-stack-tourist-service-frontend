@@ -14,36 +14,43 @@ import {
   IconButton,
   Tooltip,
   useSelect,
+  button,
 } from "@material-tailwind/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { useGetAlluserQuery } from "src/redux/api/authApi";
+import {
+  useGetAlluserQuery,
+  useMakeAdminMutation,
+} from "src/redux/api/authApi";
 import Link from "next/link";
 import { PencilIcon } from "@heroicons/react/24/solid";
 import RootLayout from "src/components/layout/RootLayout";
 import { MultiLevelSidebar } from "src/components/layout/DashBoardLayout";
-
-const TABS = [
-  {
-    label: "All",
-    value: "",
-  },
-  {
-    label: "Available",
-    value: "available",
-  },
-  {
-    label: "Upcoming",
-    value: "upcoming",
-  },
-];
-
-const TABLE_HEAD = ["Name", "email", "role", "address", "Edit"];
+import useUserFromLocalStorage from "src/customHooks/useUserFromLocalStorage";
+import { USER_ROLE } from "src/constants/role";
+import toast, { Toaster } from "react-hot-toast";
 
 const UserManage = () => {
-  const { data } = useGetAlluserQuery(); //refetchonmount
-  console.log(data);
+  const { data } = useGetAlluserQuery();
+  const [makeAdmin] = useMakeAdminMutation();
+  const user = useUserFromLocalStorage();
+  const TABLE_HEAD = ["Name", "email", "role", "address", "Edit"];
+
+  if (user?.role == USER_ROLE.SUPER_ADMIN) {
+    TABLE_HEAD.push("Make Admin");
+  }
+
+  const handleMakeAdmin = async (id) => {
+    const result = await makeAdmin(id).unwrap();
+    console.log(result);
+    if (result.success == true) {
+      toast.success(result.message);
+    } else {
+      toast.error("something went wrong");
+    }
+  };
   return (
     <Card className="h-full w-full">
+      <Toaster />
       <CardHeader floated={false} shadow={false} className="rounded-none">
         <div className="mb-8 flex items-center justify-between gap-8">
           <div>
@@ -85,7 +92,7 @@ const UserManage = () => {
           </thead>
           <tbody>
             {data?.data?.map(
-              ({ name, id, img, email, role, contactNo, address }, index) => {
+              ({ name, id, image, email, role, contactNo, address }, index) => {
                 const isLast = index === data?.data?.length - 1;
 
                 const classes = isLast
@@ -96,7 +103,7 @@ const UserManage = () => {
                   <tr key={id}>
                     <td className={classes}>
                       <div className="flex items-center gap-3">
-                        <Avatar src={img} alt={name} size="sm" />
+                        <Avatar src={image} alt={name} size="sm" />
                         <div className="flex flex-col">
                           <Typography
                             variant="small"
@@ -154,6 +161,35 @@ const UserManage = () => {
                         </Link>
                       </Tooltip>
                     </td>
+
+                    {user &&
+                    user?.role == USER_ROLE.SUPER_ADMIN &&
+                    role == USER_ROLE.USER ? (
+                      <td className={classes}>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal opacity-70"
+                        >
+                          <button
+                            onClick={() => handleMakeAdmin(id)}
+                            className="bg-sub_primary p-2 rounded text-white"
+                          >
+                            Make Admin
+                          </button>
+                        </Typography>
+                      </td>
+                    ) : (
+                      <td className={classes}>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal opacity-70"
+                        >
+                          ADMIN
+                        </Typography>
+                      </td>
+                    )}
                   </tr>
                 );
               }

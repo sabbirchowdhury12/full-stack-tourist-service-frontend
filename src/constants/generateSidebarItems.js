@@ -33,7 +33,39 @@ export const generateSidebarItems = (role) => {
       label: "FAQ",
     },
   ];
+  const superAdminSidebar = [
+    {
+      href: `/dashboard/seeting`,
+      label: "Profile Seeting",
+    },
+    {
+      href: `/dashboard/user-manage`,
+      label: "user manage",
+    },
+
+    {
+      href: `/dashboard/bookingList`,
+      label: "Booking List",
+    },
+    {
+      href: `/dashboard/serviceList`,
+      label: "Service List",
+    },
+    {
+      href: `/dashboard/faq`,
+      label: "FAQ",
+    },
+    {
+      href: `/dashboard/faq`,
+      label: "Blog",
+    },
+    {
+      href: `/dashboard/faq`,
+      label: "Customer Feedback",
+    },
+  ];
 
   if (role == USER_ROLE.USER) return defaultSideBar;
   if (role == USER_ROLE.ADMIN) return adminSidebar;
+  if (role == USER_ROLE.SUPER_ADMIN) return superAdminSidebar;
 };
