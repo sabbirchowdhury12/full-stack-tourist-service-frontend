@@ -1,7 +1,6 @@
 import { USER_ROLE } from "./role";
 
 export const generateSidebarItems = (role) => {
-  console.log(role);
   const defaultSideBar = [
     {
       href: `/dashboard/seeting`,

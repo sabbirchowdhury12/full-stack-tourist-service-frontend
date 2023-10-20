@@ -4,8 +4,8 @@ import { getAccessToken } from "src/utiles/localStorage";
 export const serviceApi = createApi({
   reducerPath: "service",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/v1",
-    // "https://fullstach-service-provider-backend-g43w62oly-sabbirchowdhury12.vercel.app/api/v1",
+    baseUrl:
+      "https://fullstach-service-provider-backend-g43w62oly-sabbirchowdhury12.vercel.app/api/v1",
 
     prepareHeaders: (headers) => {
       const accessToken = getAccessToken();
