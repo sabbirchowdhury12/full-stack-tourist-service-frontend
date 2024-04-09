@@ -44,7 +44,7 @@ const CreateUser = () => {
   return (
     <Card
       color="transparent"
-      className="flex justify-center items-center bg-[#E5F0FD] shadow h-screen"
+      className="flex justify-center items-center shadow h-screen"
       shadow={false}
     >
       <Toaster />
@@ -115,9 +115,5 @@ const CreateUser = () => {
 
 export default CreateUser;
 CreateUser.getLayout = function getLayout(page) {
-  return (
-    <RootLayout>
-      <MultiLevelSidebar>{page}</MultiLevelSidebar>
-    </RootLayout>
-  );
+  return <MultiLevelSidebar>{page}</MultiLevelSidebar>;
 };

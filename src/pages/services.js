@@ -5,18 +5,19 @@ import { useGetServiceQuery } from "src/redux/api/serviceApi";
 import { Input, IconButton, Button } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useForm } from "react-hook-form";
+import Loading from "src/components/shared/loading";
 const ServicesPage = () => {
-  const [searchValue, setSearchValue] = React.useState("car");
-  const [minPrice, setMinPrice] = React.useState(1);
-  const [maxPrice, setMaxPrice] = React.useState(10000000);
-  const [sortBy, setSortBy] = React.useState("createdAt");
-  const [page, setPage] = React.useState(1);
-  const [limit, setlimit] = React.useState(10);
+  const [searchValue, setSearchValue] = useState("");
+  const [minPrice, setMinPrice] = useState(1);
+  const [maxPrice, setMaxPrice] = useState(10000000);
+  const [sortBy, setSortBy] = useState("createdAt");
+  const [page, setPage] = useState(1);
+  const [limit, setlimit] = useState(10);
 
   const [totalPage, setTotalPage] = useState("");
 
   const { register, handleSubmit } = useForm();
-  const { data } = useGetServiceQuery({
+  const { data, isLoading } = useGetServiceQuery({
     search: searchValue,
     minPrice,
     maxPrice,
@@ -25,9 +26,6 @@ const ServicesPage = () => {
     limit,
   });
 
-  console.log(data);
-
-  console.log(searchValue);
   useEffect(() => {
     setTotalPage(data?.meta?.totalPage);
   }, [data]);
@@ -55,8 +53,12 @@ const ServicesPage = () => {
     setPage(page - 1);
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
-    <div>
+    <>
       <div className="relative flex w-full max-w-[24rem]">
         <Input
           color="blue"
@@ -175,7 +177,7 @@ const ServicesPage = () => {
           </option>
         </select>
       </div>
-    </div>
+    </>
   );
 };
 

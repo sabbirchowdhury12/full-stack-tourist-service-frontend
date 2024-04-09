@@ -39,6 +39,7 @@ const UserManage = () => {
     TABLE_HEAD.push("Make Admin");
   }
 
+  console.log(data);
   const handleMakeAdmin = async (id) => {
     const result = await makeAdmin(id).unwrap();
     console.log(result);
@@ -203,9 +204,5 @@ const UserManage = () => {
 
 export default UserManage;
 UserManage.getLayout = function getLayout(page) {
-  return (
-    <RootLayout>
-      <MultiLevelSidebar>{page}</MultiLevelSidebar>
-    </RootLayout>
-  );
+  return <MultiLevelSidebar>{page}</MultiLevelSidebar>;
 };

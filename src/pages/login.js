@@ -2,18 +2,13 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import RootLayout from "src/components/layout/RootLayout";
 import { useUserLoginMutation } from "src/redux/api/authApi";
-import {
-  Card,
-  Input,
-  Checkbox,
-  Button,
-  Typography,
-} from "@material-tailwind/react";
+import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import Link from "next/link";
 import { setLocalStorage } from "src/utiles/localStorage";
 import useUserFromLocalStorage from "src/customHooks/useUserFromLocalStorage";
-import { useRouter } from "next/router";
+
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -37,7 +32,7 @@ const LoginPage = () => {
       toast.success(result.message);
       router.push("/");
     } catch (err) {
-      toast.success("something wrong");
+      toast.error("something wrong");
     }
   };
 

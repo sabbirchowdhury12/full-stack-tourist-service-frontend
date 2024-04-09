@@ -1,27 +1,24 @@
 import { useGetCategoryServiceQuery } from "src/redux/api/serviceApi";
 import ServiceCard from "./ServiceCard";
 import Link from "next/link";
+import Heading from "../shared/heading";
+import Loading from "../shared/loading";
 
 const UpcomingService = () => {
   const { data } = useGetCategoryServiceQuery("upcoming");
   const services = data?.data;
+  if (!services?.length) {
+    return <Loading />;
+  }
   return (
-    <div className="my-40">
-      <p className="uppercase font-bold text-3xl text-primary text-center mb-2">
-        Our upcomg service
-      </p>
-      <p className="uppercase font-bold text-sm text-secondary text-center mb-10">
-        Wait for me Enjoyable service
-      </p>
+    <section>
+      <Heading
+        title=" Our upcomg service"
+        sub_title="  Wait for me Enjoyable service"
+      />
 
       <ServiceCard services={services} />
-
-      {/* <Link href={"/services"}>
-        <button className="mt-20 text-center block bg-sub_primary hover:bg-secondary rounded mx-auto text-white p-2 font-semibold ">
-          EXPLORE ALL SERVICE
-        </button>
-      </Link> */}
-    </div>
+    </section>
   );
 };
 

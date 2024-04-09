@@ -21,6 +21,7 @@ const SignupPage = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
+    console.log(data);
     const { name, email, password, confirmPassword } = data;
     setError("");
 
@@ -36,7 +37,7 @@ const SignupPage = () => {
     };
 
     try {
-      const result = await createUser({ ...userData }).unwrap();
+      const result = await createUser(userData).unwrap();
 
       setLocalStorage("accessToken", result.data.accessToken);
       setLocalStorage("user", result.data.user);

@@ -16,13 +16,8 @@ const RootLayout = ({ children }) => {
   return (
     <div>
       <TopNavbar />
-      <div
-        className="h-full container mx-6
-lg:mx-auto my-32 "
-      >
-        {children}
-      </div>
-      <footer className="flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t border-blue-gray-50 py-6 text-center md:justify-between">
+      <div className="h-full container mx-auto">{children}</div>
+      <footer className="container mx-auto flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t mt-5 py-10 border-blue-gray-50 text-center md:justify-between">
         <Typography color="blue-gray" className="font-normal">
           &copy; 2023 || Sabbir Chowdhury
         </Typography>

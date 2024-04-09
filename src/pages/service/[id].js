@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import Datepicker from "react-tailwindcss-datepicker";
 import RootLayout from "src/components/layout/RootLayout";
+import Loading from "src/components/shared/loading";
 import BookingService from "src/components/ui/BookingService";
 import DateSection from "src/components/ui/DateSection";
 import ReviewAndRating from "src/components/ui/ReviewAndRating";
@@ -16,10 +17,13 @@ const ServiceDetails = () => {
   const { id } = router.query;
   const { data } = useGetSingleServiceQuery(id);
   const service = data?.data;
-  console.log(service);
+  if (!service?.id) {
+    return <Loading />;
+  }
+
   return (
-    <div>
-      <h2 className="text-xl font-bold text-secondary my-5">
+    <section>
+      <h2 className="text-xl font-bold uppercase text-secondary my-5">
         {service?.service_name}
       </h2>
       <p className="flex gap-2 items-center mb-8">
@@ -56,12 +60,12 @@ const ServiceDetails = () => {
         <img className="w-full h-[456px]" src={service?.image} alt="" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className="div grid grid-cols-1 gap-2">
+            <img className="h-56 w-full" src={service?.image} alt="" />
             <img
               className="h-56 w-full"
               src="https://gotrip-appdir.vercel.app/_next/image?url=%2Fimg%2Frentals%2Fsingle%2F2.png&w=640&q=75"
               alt=""
-            />
-            <img className="h-56 w-full" src={service?.image} alt="" />{" "}
+            />{" "}
           </div>
           <div className="div grid grid-cols-1 gap-2">
             <img
@@ -69,11 +73,7 @@ const ServiceDetails = () => {
               src="https://gotrip-appdir.vercel.app/_next/image?url=%2Fimg%2Frentals%2Fsingle%2F2.png&w=640&q=75"
               alt=""
             />
-            <img
-              className="h-56 w-full"
-              src="https://gotrip-appdir.vercel.app/_next/image?url=%2Fimg%2Frentals%2Fsingle%2F2.png&w=640&q=75"
-              alt=""
-            />{" "}
+            <img className="h-56 w-full" src={service?.image} />{" "}
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@ const ServiceDetails = () => {
                 return (
                   <div className="flex items-center gap-2">
                     {data.svg}
-                    <span>{data.name}</span>
+                    <span className="font-semibold ml-2">{data.name}</span>
                   </div>
                 );
               })}
@@ -100,7 +100,7 @@ const ServiceDetails = () => {
             <p className="my-10 uppercase font-semibold text-deep_primary">
               OverView
             </p>
-            <p className="text-sm italic leading-10 tracking-wider border-b pb-10">
+            <p className="text-sm  leading-10 tracking-wider border-b pb-10">
               You can directly book the best price if your travel dates are
               available, all discounts are already included. In the following
               house description you will find all information about our listing.{" "}
@@ -121,8 +121,8 @@ const ServiceDetails = () => {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-6 my-20">
-        <div className="guest-review md:col-span-2">
+      <div className="grid grid-cols-2 my-20">
+        <div className="guest-review ">
           <div className="flex gap-4 items-center">
             <p className="text-xl p-2 font-bold bg-primary rounded text-white">
               4.5{" "}
@@ -145,12 +145,12 @@ const ServiceDetails = () => {
             );
           })}
         </div>
-        <div className="md:col-span-4">
+        <div>
           <ReviewSection service={service} />
         </div>
       </div>
       <ReviewAndRating id={service?.id} />
-    </div>
+    </section>
   );
 };
 

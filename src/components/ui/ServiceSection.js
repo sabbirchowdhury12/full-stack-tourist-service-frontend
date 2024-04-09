@@ -1,18 +1,21 @@
 import { useGetCategoryServiceQuery } from "src/redux/api/serviceApi";
 import ServiceCard from "./ServiceCard";
 import Link from "next/link";
+import Heading from "../shared/heading";
+import Loading from "../shared/loading";
 
 const ServicesSection = () => {
   const { data } = useGetCategoryServiceQuery("available");
   const services = data?.data?.slice(0, 6);
+  if (!services?.length) {
+    return <Loading />;
+  }
   return (
-    <div className="my-40">
-      <p className="uppercase font-bold text-3xl text-primary text-center mb-2">
-        Our available service
-      </p>
-      <p className="uppercase font-bold text-sm text-secondary text-center mb-10">
-        Choose and Enjoy your Service
-      </p>
+    <section>
+      <Heading
+        title="Our available services"
+        sub_title="CHOOSE AND ENJOY YOUR SERVICE"
+      />
 
       <ServiceCard services={services} />
 
@@ -21,7 +24,7 @@ const ServicesSection = () => {
           EXPLORE ALL SERVICE
         </button>
       </Link>
-    </div>
+    </section>
   );
 };
 

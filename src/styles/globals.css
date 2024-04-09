@@ -15,17 +15,16 @@ body {
   overflow-x: hidden;
 }
 
-.my-32 {
-  margin: 2rem auto;
+section {
+  margin: 4rem 5px;
 }
 
 input:focus {
   outline: none;
 }
 
-@media (max-width: 560px) {
-  .my-32 {
-    margin: 0.5rem;
-    margin: auto auto;
+/* @media (max-width: 560px) {
+  section {
+    padding: 0 5px;
   }
-}
+} */

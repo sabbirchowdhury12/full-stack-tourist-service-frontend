@@ -6,13 +6,11 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { MultiLevelSidebar } from "src/components/layout/DashBoardLayout";
-import RootLayout from "src/components/layout/RootLayout";
+import Loading from "src/components/shared/loading";
 import {
   useGetSingleuserQuery,
   useUpdateProfileMutation,
@@ -22,8 +20,8 @@ const UpdateUser = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data } = useGetSingleuserQuery(id);
-  console.log(data);
+  const { data, isLoading } = useGetSingleuserQuery(id);
+
   const [updateProfile] = useUpdateProfileMutation();
 
   const { register, handleSubmit, reset } = useForm();
@@ -48,10 +46,15 @@ const UpdateUser = () => {
       toast.error("something went wrong");
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+  console.log(data);
   return (
     <Card
       color="transparent"
-      className="flex justify-center items-center bg-[#E5F0FD] shadow h-screen"
+      className="flex justify-center items-center  shadow h-screen"
       shadow={false}
     >
       <Toaster />
@@ -121,9 +124,5 @@ const UpdateUser = () => {
 export default UpdateUser;
 
 UpdateUser.getLayout = function getLayout(page) {
-  return (
-    <RootLayout>
-      <MultiLevelSidebar>{page}</MultiLevelSidebar>
-    </RootLayout>
-  );
+  return <MultiLevelSidebar>{page}</MultiLevelSidebar>;
 };

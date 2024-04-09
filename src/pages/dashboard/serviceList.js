@@ -122,7 +122,7 @@ const ServiceList = () => {
         <div className="mb-8 flex items-center justify-between gap-8">
           <div>
             <Typography variant="h5" color="blue-gray">
-              Serices list
+              Services list
             </Typography>
             <Typography color="gray" className="mt-1 font-normal">
               See information about all Service
@@ -277,9 +277,5 @@ const ServiceList = () => {
 export default ServiceList;
 
 ServiceList.getLayout = function getLayout(page) {
-  return (
-    <RootLayout>
-      <MultiLevelSidebar>{page}</MultiLevelSidebar>
-    </RootLayout>
-  );
+  return <MultiLevelSidebar>{page}</MultiLevelSidebar>;
 };

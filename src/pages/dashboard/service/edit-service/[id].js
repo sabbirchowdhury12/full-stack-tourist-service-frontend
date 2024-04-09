@@ -52,7 +52,7 @@ const EditService = () => {
   return (
     <Card
       color="transparent"
-      className="flex justify-center items-center bg-[#E5F0FD] shadow h-screen"
+      className="flex justify-center items-center  shadow h-screen"
       shadow={false}
     >
       <Toaster />
@@ -133,9 +133,5 @@ const EditService = () => {
 export default EditService;
 
 EditService.getLayout = function getLayout(page) {
-  return (
-    <RootLayout>
-      <MultiLevelSidebar>{page}</MultiLevelSidebar>
-    </RootLayout>
-  );
+  return <MultiLevelSidebar>{page}</MultiLevelSidebar>;
 };

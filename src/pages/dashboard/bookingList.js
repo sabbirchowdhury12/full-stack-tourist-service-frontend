@@ -256,18 +256,7 @@ export function BookingList() {
                         </button>
                       </td>
                     ) : (
-                      <td className={classes}>
-                        <div className="flex flex-col">
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            disabled
-                            className="font-normal text-blue-gray-500 p-1 lowercase rounded"
-                          >
-                            confirmed
-                          </Typography>
-                        </div>
-                      </td>
+                      ""
                     )
                   ) : undefined}
                 </tr>
@@ -282,9 +271,5 @@ export function BookingList() {
 
 export default BookingList;
 BookingList.getLayout = function getLayout(page) {
-  return (
-    <RootLayout>
-      <MultiLevelSidebar>{page}</MultiLevelSidebar>
-    </RootLayout>
-  );
+  return <MultiLevelSidebar>{page}</MultiLevelSidebar>;
 };

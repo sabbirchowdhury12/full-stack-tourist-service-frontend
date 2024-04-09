@@ -35,10 +35,10 @@ const Cart = ({ openCart, setOpenCart }) => {
       </button>
       {cart?.map((service) => {
         return (
-          <div className="flex items-center justify-between gap-5 mb-5">
+          <div className="flex items-center flex-col md:flex-row justify-between gap-5 mb-5">
             <Link
               href={`/service/${service?.id}`}
-              className="flex items-center gap-3"
+              className="flex items-center flex-col md:flex-row gap-3"
               onClick={() => setOpenCart(false)}
             >
               <img
@@ -57,7 +57,7 @@ const Cart = ({ openCart, setOpenCart }) => {
               onClick={() => removeFromCart(service?.id)}
               className="text-white bg-red-700 p-2 rounded"
             >
-              remove
+              Remove
             </button>
           </div>
         );

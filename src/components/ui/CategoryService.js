@@ -2,6 +2,8 @@ import { useGetCategoryServiceQuery } from "src/redux/api/serviceApi";
 import ServiceCard from "./ServiceCard";
 import Link from "next/link";
 import { useState } from "react";
+import Heading from "../shared/heading";
+import Loading from "../shared/loading";
 
 const categories = [
   { name: "hotel", value: "hotel" },
@@ -12,8 +14,11 @@ const categories = [
 const CategoryService = () => {
   const [activeCategory, setActiveCategory] = useState("hotel");
   const [active, setActive] = useState(0);
-  const { data } = useGetCategoryServiceQuery(activeCategory);
+  const { data, isLoading } = useGetCategoryServiceQuery(activeCategory);
   const services = data?.data;
+  if (!services?.length) {
+    return <Loading />;
+  }
 
   const handleCategory = (categoryValue, index) => {
     setActiveCategory(categoryValue);
@@ -21,10 +26,8 @@ const CategoryService = () => {
   };
 
   return (
-    <div className="my-40">
-      <p className="uppercase font-bold text-3xl text-primary text-center mb-2">
-        Choose Service By Category
-      </p>
+    <section>
+      <Heading title=" Choose Service By Category" sub_title="" />
 
       <div className="flex items-center justify-around my-8">
         {categories.map((category, index) => {
@@ -43,7 +46,7 @@ const CategoryService = () => {
       </div>
 
       <ServiceCard services={services} />
-    </div>
+    </section>
   );
 };
 

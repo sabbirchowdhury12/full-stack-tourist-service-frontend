@@ -22,17 +22,21 @@ const ProfileSeeting = () => {
   const id = user?.id;
 
   const handleUpdateProfile = async (data) => {
-    const profileData = {
+    const userData = {
       name: data?.name,
       address: data?.address,
       contactNo: data?.contactNO,
+      image: data?.image,
     };
 
     try {
-      const result = await updateProfile({ id, profileData });
-
-      toast.success(result.message);
-      reset();
+      const result = await updateProfile({ id, userData });
+      console.log(result);
+      if (result?.data?.data?.id) {
+        toast.success("profile update successfully");
+        reset();
+        localStorage.setItem("user", JSON.stringify(result?.data?.data));
+      }
     } catch (err) {
       toast.error("try again");
     }
@@ -61,35 +65,30 @@ const ProfileSeeting = () => {
     }
   };
   return (
-    <Card
-      color="transparent"
-      className="p-20 text-Black flex justify-center mx-auto items-center bg-[#E5F0FD] h-screen"
-      shadow={false}
-    >
-      <Toaster />
-      <div className="w-full ">
-        <p>Change your Information</p>
+    <>
+      <div className="flex justify-center flex-col items-center h-screen">
+        <p className="font-bold text-center mb-5">Change your Information</p>
 
-        <div className="flex gap-20 my-40">
-          <p
+        <div className="cursor-pointer">
+          <span
             onClick={() => setForm(true)}
             className={`${
               form ? "border-b border-primary" : undefined
             } pb-2 mb-2`}
           >
             Personal Information{" "}
-          </p>
-          <p
+          </span>
+          <span
             className={`${
-              !form ? "border-b border-primary" : undefined
-            } pb-2 mb-2`}
+              !form ? "border-b border-primary " : undefined
+            } pb-2 mb-2 ml-8`}
             onClick={() => setForm(false)}
           >
             Change Password{" "}
-          </p>
+          </span>
         </div>
 
-        <div>
+        <div className="">
           {form ? (
             <form
               className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
@@ -108,6 +107,12 @@ const ProfileSeeting = () => {
                   type="number"
                   label="contact no"
                   {...register("contactNO")}
+                />
+                <Input
+                  size="xl"
+                  type="text"
+                  label="profile image"
+                  {...register("image")}
                 />
               </div>
 
@@ -156,15 +161,11 @@ const ProfileSeeting = () => {
           )}
         </div>
       </div>
-    </Card>
+    </>
   );
 };
 
 export default ProfileSeeting;
 ProfileSeeting.getLayout = function getLayout(page) {
-  return (
-    <RootLayout>
-      <MultiLevelSidebar>{page}</MultiLevelSidebar>
-    </RootLayout>
-  );
+  return <MultiLevelSidebar>{page}</MultiLevelSidebar>;
 };

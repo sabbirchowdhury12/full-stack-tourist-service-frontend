@@ -6,15 +6,11 @@ import {
 import RootLayout from "src/components/layout/RootLayout";
 
 const dashboard = () => {
-  return <div>this is my dashboas</div>;
+  return <div className="text-center">COMING SOON.......</div>;
 };
 
 export default dashboard;
 
 dashboard.getLayout = function getLayout(page) {
-  return (
-    <RootLayout>
-      <MultiLevelSidebar>{page}</MultiLevelSidebar>
-    </RootLayout>
-  );
+  return <MultiLevelSidebar>{page}</MultiLevelSidebar>;
 };

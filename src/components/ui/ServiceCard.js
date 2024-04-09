@@ -24,7 +24,7 @@ const ServiceCard = ({ services }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-20">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6  ">
       <Toaster />
       {services?.map((service) => {
         const {
@@ -39,7 +39,7 @@ const ServiceCard = ({ services }) => {
         } = service;
 
         return (
-          <div className="relative group " key={id}>
+          <div className="relative group shadow-md border p-4 rounded" key={id}>
             <div className="h-96 rounded relative overflow-hidden">
               <img
                 className="h-full w-full transition-transform duration-500 transform origin-center group-hover:scale-110"

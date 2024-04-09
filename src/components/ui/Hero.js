@@ -31,8 +31,8 @@ export function Hero() {
             />
             <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center text-white text-center">
               <div className="absolute inset-0 bg-black opacity-50 rounded-xl"></div>
-              <h2 className="text-lg relative z-10">{slider.title}</h2>
-              <p className="text-6xl font-bold mt-4 relative z-10">
+              <h2 className=" relative z-10 text-sm">{slider.title}</h2>
+              <p className="text-2xl md:text-4xl lg:text-6xl font-bold mt-4 relative z-10">
                 {slider.desc}
               </p>
             </div>

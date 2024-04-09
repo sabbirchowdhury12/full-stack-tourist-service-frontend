@@ -5,13 +5,14 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Heading from "../shared/heading";
 
 const Testomonial = () => {
   var settings = {
     dots: true,
     className: `center`,
     infinite: true,
-    centerPadding: "50px",
+
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
@@ -19,7 +20,7 @@ const Testomonial = () => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 600,
+        breakpoint: 800,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -27,7 +28,7 @@ const Testomonial = () => {
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 600,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -37,16 +38,14 @@ const Testomonial = () => {
   };
 
   return (
-    <div className="container mx-auto mb-10">
-      <p className="uppercase font-bold text-3xl text-primary text-center mb-2">
-        Testomonial
-      </p>
+    <section>
+      <Heading title="Testomial" sub_title="Our CLient REview" />
       <div className="">
         <Slider {...settings}>
           {reviews.map((review, ind) => {
             return (
               <section key={ind} className="bg-white dark:bg-gray-900">
-                <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
+                <div className="max-w-screen-xl px-4  mx-auto text-center lg:px-6">
                   <figure className="max-w-screen-md mx-auto">
                     <svg
                       className="h-8 mx-auto mb-3 text-secondary"
@@ -86,7 +85,7 @@ const Testomonial = () => {
           })}
         </Slider>
       </div>
-    </div>
+    </section>
   );
 };
 

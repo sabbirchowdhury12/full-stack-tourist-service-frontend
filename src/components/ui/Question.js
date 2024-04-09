@@ -4,6 +4,7 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
+import Heading from "../shared/heading";
 
 export function FAQAccordion() {
   const [open, setOpen] = React.useState(1);
@@ -11,13 +12,11 @@ export function FAQAccordion() {
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
 
   return (
-    <>
-      <p className="uppercase font-bold text-3xl text-primary text-center mb-2 my-20">
-        FAQ
-      </p>
+    <section>
+      <Heading title={"FAQ"} />
       <Accordion open={open === 1}>
         <AccordionHeader onClick={() => handleOpen(1)}>
-          What is Material Tailwind?
+          How can you get our Service?
         </AccordionHeader>
         <AccordionBody>
           We&apos;re not always in the position that we want to be at.
@@ -28,7 +27,7 @@ export function FAQAccordion() {
       </Accordion>
       <Accordion open={open === 2}>
         <AccordionHeader onClick={() => handleOpen(2)}>
-          How to use Material Tailwind?
+          What kind our services available?
         </AccordionHeader>
         <AccordionBody>
           We&apos;re not always in the position that we want to be at.
@@ -39,7 +38,7 @@ export function FAQAccordion() {
       </Accordion>
       <Accordion open={open === 3}>
         <AccordionHeader onClick={() => handleOpen(3)}>
-          What can I do with Material Tailwind?
+          How can I get discount?
         </AccordionHeader>
         <AccordionBody>
           We&apos;re not always in the position that we want to be at.
@@ -48,6 +47,6 @@ export function FAQAccordion() {
           dreams.
         </AccordionBody>
       </Accordion>
-    </>
+    </section>
   );
 }

@@ -1,5 +1,5 @@
 import { Rating } from "@material-tailwind/react";
-import React from "react";
+import { Avatar } from "@material-tailwind/react";
 
 const person = (
   <svg height="20" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg">
@@ -13,7 +13,7 @@ const ReviewSection = ({ service }) => {
   console.log(service);
   return (
     <div className="lg:ml-20">
-      <span>Guests Review</span>
+      <span className="font-bold">Guests Review</span>
       {service?.reviews?.map((review) => {
         const rating = service.ratings.find(
           (rating) => rating.userId === review.userId
@@ -23,7 +23,7 @@ const ReviewSection = ({ service }) => {
           return (
             <div key={review.id}>
               <div className="flex my-4 items-center gap-4">
-                {person}
+                <Avatar src={rating?.user?.image} alt={name} size="sm" />
                 <div>
                   <p className="uppercase">{rating.user.name}</p>
                   <p className="text-deep_primary text-sm">03 july 2023</p>
