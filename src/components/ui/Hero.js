@@ -23,7 +23,7 @@ export function Hero() {
     <Carousel transition={{ duration: 1 }} className="rounded-xl mt-0 ">
       {sliderData.map((slider) => {
         return (
-          <div className="relative h-screen">
+          <div className="relative h-screen" key={slider?.img}>
             <img
               src={slider.img}
               alt="image 1"

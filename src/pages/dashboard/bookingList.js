@@ -49,17 +49,20 @@ const TABS = [
 ];
 
 export function BookingList() {
-  const [statusValue, setStatusValue] = useState("pending");
+  const [statusValue, setStatusValue] = useState("all");
 
-  console.log(statusValue);
   const { data } = useGetBookingQuery(statusValue);
 
   const [cancelBooking] = useCancelBookingMutation();
   const [confirmBooking] = useConfirmBookingMutation();
 
   const TABLE_HEAD = ["Name", "Service", "Status", "Cancel"];
-  const user = useUserFromLocalStorage();
-  if (user?.role == USER_ROLE.SUPER_ADMIN || user?.role == USER_ROLE.ADMIN) {
+  const userInfo = useUserFromLocalStorage();
+
+  if (
+    userInfo?.role == USER_ROLE.SUPER_ADMIN ||
+    userInfo?.role == USER_ROLE.ADMIN
+  ) {
     TABLE_HEAD.push("Confirm");
   }
 
@@ -153,7 +156,7 @@ export function BookingList() {
                 : "p-4 border-b border-blue-gray-50";
 
               return (
-                <tr key={name}>
+                <tr key={index}>
                   <td className={classes}>
                     <div className="flex items-center gap-3">
                       <Avatar src={user?.image} alt={name} size="sm" />
@@ -240,7 +243,7 @@ export function BookingList() {
                     )}
                   </td>
 
-                  {user.role !== USER_ROLE.USER ? (
+                  {userInfo?.role !== USER_ROLE.USER ? (
                     status == "pending" ? (
                       <td className={classes}>
                         <button onClick={() => handleConfirmBooking(id)}>
@@ -256,7 +259,7 @@ export function BookingList() {
                         </button>
                       </td>
                     ) : (
-                      ""
+                      "payment"
                     )
                   ) : undefined}
                 </tr>

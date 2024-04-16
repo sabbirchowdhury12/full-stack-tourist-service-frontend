@@ -104,11 +104,7 @@ const ServicesPage = () => {
               {...register("maxPrice", { required: true })}
             />
 
-            <Button
-              className=" bg-sub_primary hover:bg-secondary"
-              fullWidth
-              type="submit"
-            >
+            <Button className=" bg-sub_primary px-10 " type="submit">
               GO
             </Button>
           </div>
